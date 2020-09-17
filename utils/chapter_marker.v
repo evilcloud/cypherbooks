@@ -11,7 +11,8 @@ fn main() {
 		return
 	}
 	lines := contents.split_into_lines()
-	mut counter := map[string]string
+	// mut new_content := []
+	mut markerbase := map[string]string
 	for line in lines {
 		l := line.trim_space()
 		if l.len > 4 && l[..4] == '// :' {
@@ -21,9 +22,20 @@ fn main() {
 			}
 			marker := n[0].trim_space()
 			value := n[1..].join(':').trim_space()
-			
-			counter[marker] = value
-			print(counter)
+			markerbase[marker] = value
+			mut marker_string := " "
+			for m, v in markerbase {
+				marker_string += ', ' + m + ': ' + '"' + v +'"'
+			}
+			println(marker_string)
+		} else {
+			for item, _ in markerbase {
+				if item in line {
+					println('$item')
+				}
+				println(line)
+			}
 		}
+		// println(new_content)
 	}
 }
