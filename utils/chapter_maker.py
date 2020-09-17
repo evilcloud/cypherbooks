@@ -32,7 +32,7 @@ def main():
             except ValueError:
                 value = f'"{value.strip()}"'
             chapt_info[marker] = value
-            print(chapt_info)
+        print(chapt_info)
 
 
 if __name__ == "__main__":
