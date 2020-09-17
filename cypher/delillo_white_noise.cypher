@@ -12,7 +12,7 @@ create
     (ford:Person {name: "Gerard Ford", position: "leader", part: 1, chapter: 1}),
     (carter:Person {name: "Jimmy Carter", position: "leader", part: 1, chapter: 1}),
     (austria:Location {name: "Austria", type: "country", part: 1, chapter: 1}),
-    // :chapter: 2
+    // :chapter: 2a
     (babette:Person {name: "Babette", part: 1, chapter: 2}),
     (volunteers:Institution {name: "volunteering group", type: "compassion", part: 1, chapter: 2}),
     (blind:Institution {name: "blind people", part: 1, chapter: 2}),
