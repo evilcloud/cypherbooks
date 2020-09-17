@@ -7,6 +7,7 @@ Currently there are:
 ## CHAPTER_MARKER
 
 ![](../media/chapter_maker.gif)
+
 scans a .cypher file provided in the argument for any dividers (marked by `// :` followed by the marker name and a marker value after a `:`, like `// :chapter: 1`) and checks the following entries (both nodes and edges) for presence of these markers. If no marker is present, the program adds it in the valid cypher format. Multiple markers possible, like:
 
 ```go
