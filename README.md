@@ -1,11 +1,18 @@
 # Cypherbooks
 
-Graph constructs (cypher / GQL / SPARQL / JSON) of books' nouns, events and relations node-by-node, edge-by-edge
+Graph constructs (cypher / GQL / SPARQL / JSON) of books' nouns, events and relations node-by-node, edge-by-edge.
+
+## Utilities
+This repo also contains some small utilities, that help to automate data entry and handling. These can be found in the [utilities folder](https://github.com/evilcloud/cypherbooks/tree/master/utils)
 
 ## Don DeLillo: White Noise (1985)
 
 ![](media/delillo_white_noise.jpg)
-White Noise is considered one of, if not _the_ best work of the American author Don DeLillo. The novel is a prime example of postmodernist literature, both by the content and by form.
+White Noise is considered one of, if not _the_, best work of the American author Don DeLillo. The novel is a prime example of postmodernist literature, both by the content and by form.
+
+The narrative in the book is protagonist-centric and is told only from his point of view, thus he is the central point in the graph with all other important nodes branching out from him.
+
+The book is broken down into Parts and Chapters. 
 
 ## रामायणम्
 
