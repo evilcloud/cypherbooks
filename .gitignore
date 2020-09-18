@@ -3,6 +3,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,macos,go,intellij,intellij+all,intellij+iml,python,sublimetext,zsh
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,macos,go,intellij,intellij+all,intellij+iml,python,sublimetext,zsh
 
+
 ### Go ###
 # Binaries for programs and plugins
 *.exe
@@ -359,6 +360,9 @@ ipython_config.py
 #   having no cross-platform support, pipenv may install dependencies that don't work, or not
 #   install all needed dependencies.
 #Pipfile.lock
+
+# Own
+in_progress/
 
 # PEP 582; used by e.g. github.com/David-OConnor/pyflow
 __pypackages__/
