@@ -1,7 +1,7 @@
 create
 // I - WAVES AND RADIATION 
-// :part: 1
-    // :chapter: 1
+// {part: 1}
+    // {chapter: 1}
     (hill:Institution {name: "College-on-the-Hill", type: "education", part: 1, chapter: 1}),
     (protagonist:Person {name: "Jack Gladney", part: 1, chapter: 1}),
     (hitlerStudies:Subject {name: "Hitler Studies", type: "Academic discipline", since: 1968, part: 1, chapter: 1}),
@@ -12,7 +12,7 @@ create
     (ford:Person {name: "Gerard Ford", position: "leader", part: 1, chapter: 1}),
     (carter:Person {name: "Jimmy Carter", position: "leader", part: 1, chapter: 1}),
     (austria:Location {name: "Austria", type: "country", part: 1, chapter: 1}),
-    // :chapter: 2a
+    // {chapter: 2a}
     (babette:Person {name: "Babette", part: 1, chapter: 2}),
     (volunteers:Institution {name: "volunteering group", type: "compassion", part: 1, chapter: 2}),
     (blind:Institution {name: "blind people", part: 1, chapter: 2}),
@@ -32,7 +32,7 @@ create
     (denise:Person {name: "Denise", child: true, age: 11, part: 1, chapter: 2}),
     (steffie:Person {name: "Steffie", child: true, part: 1, chapter: 2}),
     (heinrich:Person {name: "Heinrich", child: true, part: 1, chapter: 2}),
-    // :chapter: 3
+    // {chapter: 3}
     (centuryHall:Location {name: "Century Hall", type: "building", part: 1, chapter: 3}),
     (cultDept:Institution {name: "culture deartment", fullName: "American environmets", type: "education", part: 1, chapter: 3}),
     (alfonse:Person {name: "Alfonse", fullName: "Alfonse (Fast Food) Stompanato", part: 1, chapter: 3}),
@@ -51,8 +51,8 @@ create
 
 
 // I - WAVES AND RADIATION
-// :part:1
-    // :chapter: 1
+// {part:1}
+    // {chapter: 1}
     (hill)<-[:EMPLOYED_BY {chapter: 1}]-(protagonist),
     (hill)<-[:PART_OF {chapter: 1}]-(hitlerDept),
     (hitlerStudies)-[:SUBJECT_OF]->(hitlerDept),
@@ -63,8 +63,8 @@ create
     (chancellor)-[:ASSIST]->(ford),
     (chancellor)-[:ASSIST]->(carter),
     (chancellor)-[:DIED_IN]->(austria),
-    (chancellor)-[:ASSIST {type: ["course", "identity"]}]->(protagonist),
-    // :chapter: 2
+    (chancellor)-[:ASSIST {type: "identity"}]->(protagonist),
+    // {chapter: 2}
     (protagonist)-[:MARRIED_TO]->(babette),
     (volunteers)-[:ASSIST]->(blind),
     (babette)-[:MEMBER_OF]->(volunteers),
@@ -87,11 +87,10 @@ create
     (home)<-[:MEMBER_OF]-(kitchen),
     (denise)<-[:MOTHER_OF]-(babette),
     (denise)-[:LIVES_IN]->(home),
-    (steffie)<-[:MOTHER_OF]-(babette),
     (steffie)-[:LIVES_IN]->(home),
     (heinrich)<-[:FATHER_OF]-(protagonist),
     (heinrich)-[:LIVES_IN]->(home),
-    // :chapter: 3
+    // {chapter: 3}
     (cultDept)-[:LOCATED_IN]->(centuryHall),
     (hitlerDept)-[:LOCATED_IN]->(centuryHall),
     (alfonse)-[:HEAD_OF]->(cultDept),
