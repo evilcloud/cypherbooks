@@ -31,7 +31,7 @@ create
     (bedroom:Location {name: "bedroom", part: 1, chapter: 2}),
     (denise:Person {name: "Denise", child: true, age: 11, part: 1, chapter: 2}),
     (steffie:Person {name: "Steffie", child: true, part: 1, chapter: 2}),
-    (heinrich:Person {name: "Heinrich", child: true, part: 1, chapter: 2}),
+    (heinrich:Person {name: "Heinrich", child: true, age: 14, part: 1, chapter: 2}),
     // {chapter: 3}
     (centuryHall:Location {name: "Century Hall", type: "building", part: 1, chapter: 3}),
     (cultDept:Institution {name: "culture deartment", fullName: "American environmets", type: "education", part: 1, chapter: 3}),
@@ -40,13 +40,35 @@ create
     (roomingHouse:Location {name: "rooming house", type: "dwelling", part: 1, chapter: 3}),
     (womanWithSecret:Person {name: "a woman who harbors a terrible secret", part: 1, chapter: 3}),
     (hautedMan:Person {name: "a man with a hauted look", part: 1, chapter: 3}),
-    (roomMan:Person {name: "a man who never comes out of his room", part: 1, chapter: 3}),
+    (dunlop:Person {name: "Howard Dunlop", nickName: "a man who never comes out of his room", part: 1, chapter: 3}),
     (letterboxWoman:Person {name: "a woman who stnds by the letterbox for hours", part: 1, chapter: 3}),
     (noPastMan:Person {name: "a man with no past", part: 1, chapter: 3}),
     (blacksmith:Location {name: "Blacksmith", type: "settlement", part: 1, chapter: 3}),
     (asylum:Institution:Location {name: "Insane asylum", part: 1, chapter: 3}),
     (barn:Institution:Location {name: "tourist barn", fullName: "The most photographed barn in America", part: 1, chapter: 3}),
     (farmington:Location {name: "Farmington", type: "settlement", part: 1, chapter: 3}),
+    // {chapter: 4}
+    (bee:Person {name: "Bee", child: true}),
+    (tweedy:Person {name: "Tweedy Browner"}),
+    (korea:Location {name: "South Korea", type: "country"}),
+    (eroticFic:Item {name: "erotic fiction"}),
+    // {chapter: 5}
+    // {chapter: 6}
+    (devi:Person {name: "Mother Devi"}),
+    (ashram:Location {name: "ashram", fullName: "Dharamsalapur", type: "community"}),
+    (tubb:Location {name: "Tubb, Montana", type: "settlement"}),
+    (artsDuplex:Location {name: "Arts Duplex", type: "building"}),
+    (advNazism:Subject {name: "Advanced Nazism", type: "academic discipline"}),
+    // {chapter: 7}
+    (church:Location:Institution {name: "Congregational church"}),
+    // {chapter: 8}
+    // {chapter: 9}
+    (chun:Person {name: "Chun Duc", child: true}),
+    // {chapter: 10}
+    (tommyRoy:Person {name: "Tommy Roy Foster", position: "criminal"}),
+    (prison:Institution {name: "prison"}),
+    (ironCity:Location {name: "Iron City", type: "settlement"}),
+
 
 
 
@@ -63,12 +85,11 @@ create
     (chancellor)-[:ASSIST]->(ford),
     (chancellor)-[:ASSIST]->(carter),
     (chancellor)-[:DIED_IN]->(austria),
-    (chancellor)-[:ASSIST {type: "identity"}]->(protagonist),
     // {chapter: 2}
     (protagonist)-[:MARRIED_TO]->(babette),
     (volunteers)-[:ASSIST]->(blind),
     (babette)-[:MEMBER_OF]->(volunteers),
-    (babette)-[:MEMBER_OF]->(adEd),
+    (babette)-[:TEACHES]->(adEd),
     (babette)-[:READ]->(treadwell),
     (treadwell)-[:MEMBER_OF]->(blind),
     (treadwell)-[:LIKES]->(natEnquirer),
@@ -98,7 +119,7 @@ create
     (murray)-[:LIVES_IN {role: "The Jew", permanent: false}]->(roomingHouse),
     (womanWithSecret)-[:LIVES_IN {permanent: true}]->(roomingHouse),
     (hautedMan)-[:LIVES_IN {permanent: true}]->(roomingHouse),
-    (roomMan)-[:LIVES_IN {permanent: true}]->(roomingHouse),
+    (dunlop)-[:LIVES_IN {permanent: true}]->(roomingHouse),
     (letterboxWoman)-[:LIVES_IN {permanent: true}]->(roomingHouse),
     (noPastMan)-[:LIVES_IN {permanent: true}]->(roomingHouse),
     (home)-[:LOCATED_IN]->(blacksmith),
@@ -107,4 +128,28 @@ create
     (asylum)-[:LOCATED_IN]->(blacksmith),
     (barn)-[:LOCATED_IN]->(farmington),
     (protagonist)-[:TRAVEL_TO]->(barn),
-    (murray)-[:TRAVEL_TO]->(barn)
+    (murray)-[:TRAVEL_TO]->(barn),
+    // {chapter: 4}
+    (bee)<-[:FATHER_OF]-(protagonist),
+    (bee)<-[:MOTHER_OF]-(tweedy),
+    (bee)-[:KNOWS]->(steffie),
+    (bee)-[:LIVES_IN {current: false}]->(korea),
+    (babette)-[:READ]->(eroticFic),
+    (chancellor)-[:ASSIST {type: "identity"}]->(protagonist),
+    // {chapter: 5}
+    // {chapter: 6}
+    (heinrich)<-[:MOTHER_OF]-(devi),
+    (devi)-[:LIVES_IN]->(ashram),
+    (ashram)-[:LOCATED_IN]->(tubb),
+    (advNazism)-[:SUBJECT_OF]->(hitlerStudies),
+    (protagonist)-[:TEACHES]->(advNazism),
+    // {chapter: 7}
+    (babette)-[:TEACHES]->(church),
+    // {chapter: 8}
+    (dunlop)-[:TEACHES]->(protagonist),
+    // {chapter: 9}
+    (murray)-[:AFFINITY_TO]->(babette),
+    // {chapter: 10}
+    (tommyRoy)-[:LOCATED_IN]->(prison),
+    (prison)-[:LOCATED_IN]->(ironCity),
+    (heinrich)-[:KNOWS {how: "playing chess"}]->(tommyRoy)
