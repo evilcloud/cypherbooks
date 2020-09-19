@@ -11,6 +11,9 @@ fn main() {
 		return
 	}
 	lines := contents.split_into_lines()
+}
+
+fn run_lines(lines: array) {
 	// mut new_content := []
 	mut markerbase := map[string]string
 	for line in lines {
