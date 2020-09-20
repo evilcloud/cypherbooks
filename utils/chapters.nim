@@ -1,10 +1,12 @@
+import strutils
+import strformat
+import re
+
 let fileContent = readFile("../cypher/delillo_white_noise.cypher")
 
-# for line in fileContent.lines:
-#     echo line
+let fileLines = splitLines(fileContent)
+echo fmt"...loaded {fileLines.len} strings"
 
-
-let content = array[]
-let input = open("../cypher/delillo_white_noise.cypher")
-for line in input.lines:
-    content += line
+for line in fileLines:
+    if line.find(re"\/\/ {\.*}"):
+        echo line
