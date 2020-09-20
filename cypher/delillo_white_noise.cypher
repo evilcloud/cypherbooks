@@ -77,6 +77,7 @@ create
     (eugene:Person {name: "Eugene", child: true, age: 8}),
     (babetteEx:Person {name: "Babette's ex"}),
     (australia:Location {name: "Australia", type: "country"}),
+    // {chapter: 12}
     (greek:Language:Subject {name: "Greek"}),
     (latin:Language:Subject {name: "Latin"}),
     (sailing:Subject {name: "Ocean sailing"}),
@@ -180,6 +181,7 @@ create
     (babetteEx)-[:FATHER_OF]->(wilder),
     (babetteEx)-[:LIVES_IN]->(australia),
     (eugene)-[:LIVES_IN]->(australia),
+    // {chapter: 12}
     (dunlop)-[:KNOWS]->(greek),
     (dunlop)-[:KNOWS]->(latin),
     (dunlop)-[:KNOWS]->(sailing),
