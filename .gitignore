@@ -3,6 +3,10 @@
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,macos,go,intellij,intellij+all,intellij+iml,python,sublimetext,zsh
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,macos,go,intellij,intellij+all,intellij+iml,python,sublimetext,zsh
 
+### Nim ###
+nimcache/
+nimblecache/
+htmldocs/
 
 ### Go ###
 # Binaries for programs and plugins
