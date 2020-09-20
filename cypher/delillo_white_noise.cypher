@@ -3,7 +3,7 @@ create
 // {part: 1}
     // {chapter: 1}
     (hill:Institution {name: "College-on-the-Hill", type: "education", part: 1, chapter: 1}),
-    (protagonist:Person {name: "Jack Gladney", part: 1, chapter: 1}),
+    (protagonist:Person {name: "Jack Gladney", age: 51, part: 1, chapter: 1}),
     (hitlerStudies:Subject {name: "Hitler Studies", type: "Academic discipline", since: 1968, part: 1, chapter: 1}),
     (hitlerDept:Institution {name: "department of Hitler Studies", type: "education", part: 1, chapter: 1}),
     (chancellor:Person {name: "chancellor of College-on-Hill", position: "leader", part: 1, chapter: 1}),
@@ -62,12 +62,28 @@ create
     // {chapter: 7}
     (church:Location:Institution {name: "Congregational church"}),
     // {chapter: 8}
+    (german:Language:Subject {name: "German"}),
     // {chapter: 9}
     (chun:Person {name: "Chun Duc", child: true}),
     // {chapter: 10}
     (tommyRoy:Person {name: "Tommy Roy Foster", position: "criminal"}),
     (prison:Institution {name: "prison"}),
     (ironCity:Location {name: "Iron City", type: "settlement"}),
+    // {chapter: 11}
+    (cia:Institution {name: "CIA"}),
+    (dana:Person {name: "Dana Breedlove", age: babette.age}),
+    (spanish:Language {name: "Spanish"}),
+    (portugese:Language {name: "Portugese"}),
+    (eugene:Person {name: "Eugene", child: true, age: 8}),
+    (babetteEx:Person {name: "Babette's ex"}),
+    (australia:Location {name: "Australia", type: "country"}),
+    (greek:Language:Subject {name: "Greek"}),
+    (latin:Language:Subject {name: "Latin"}),
+    (sailing:Subject {name: "Ocean sailing"}),
+    (meteorology:Subject {name: "Meteorology"}),
+    (bob:Person {name: "Bob Pardee"}),
+    (treadwellSister:Person {name: "Mr. Treadwell's sister"}),
+    (treadwellHouse:Location {name: "Mr. Treadwell's house", type: "dwelling"}),
 
 
 
@@ -146,10 +162,29 @@ create
     // {chapter: 7}
     (babette)-[:TEACHES]->(church),
     // {chapter: 8}
+    (protagonist)-[:NOT_KNOWS]->(german),
+    (dunlop)-[:KNOWS]->(german),
     (dunlop)-[:TEACHES]->(protagonist),
     // {chapter: 9}
     (murray)-[:AFFINITY_TO]->(babette),
     // {chapter: 10}
     (tommyRoy)-[:LOCATED_IN]->(prison),
     (prison)-[:LOCATED_IN]->(ironCity),
-    (heinrich)-[:KNOWS {how: "playing chess"}]->(tommyRoy)
+    (heinrich)-[:KNOWS {how: "playing chess"}]->(tommyRoy),
+    // {chapter: 11}
+    (dana)-[:EMPLOYED_BY]->(cia),
+    (dana)-[:KNOWS]->(spanish),
+    (dana)-[:KNOWS]->(portugese),
+    (eugene)<-[:FATHER_OF]-(babetteEx),
+    (eugene)<-[:MOTHER_OF]-(babette),
+    (babetteEx)-[:FATHER_OF]->(wilder),
+    (babetteEx)-[:LIVES_IN]->(australia),
+    (eugene)-[:LIVES_IN]->(australia),
+    (dunlop)-[:KNOWS]->(greek),
+    (dunlop)-[:KNOWS]->(latin),
+    (dunlop)-[:KNOWS]->(sailing),
+    (dunlop)-[:KNOWS]->(meteorology),
+    (bob)-[:FATHER_OF]->(denise),
+    (treadwellSister)-[:SISTER_OF]->(treadwell),
+    (treadwell)-[:LIVES_IN]->(treadwellHouse),
+    (treadwellSister)-[:LIVES_IN]->(treadwellHouse)
