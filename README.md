@@ -25,3 +25,6 @@ The Ramayana is one of the three (if we consider Bhagavat Gita as an independent
 
 Currently the development has paused, as I am reviewing the entry criteria
 ![](media/ramanyana_graph.png)
+
+![](media/made_in_japan.jpg)
+Made in Japan: Studies in Popular Music -- an academic study of the genealogy of Japanese popular music from revue to enka.
