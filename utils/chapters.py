@@ -1,13 +1,12 @@
-from os import linesep, write
-import sys
-import os
 import logging
+import os
 import re
-from typing import Any, List
+import sys
 
 
 def get_lines(filename: str) -> list:
     """ returns the content of the file as per provided filename line by line """
+    lines = []
     if not os.path.splitext(filename)[1] in (".cypher", ".cyp"):
         print("Please provide a valid cypher file")
         sys.exit()
@@ -19,15 +18,15 @@ def get_lines(filename: str) -> list:
     return lines
 
 
-def save_lines(filename: str, lines: list):
+def save_lines(filename: str, lines: list) -> str:
     head, tail = os.path.split(filename)
     new_filename = os.path.join(head, "NEW_" + tail)
-    print(f"saving {new_filename}")
     with open(new_filename, "w") as f:
         f.writelines(lines)
+    return new_filename
 
 
-def make_marker_string(data: dict) -> str:
+def properties_to_string(data: dict) -> str:
     """ returns a valid cypher argument string with provided markers """
     string = ""
     for key in data:
@@ -35,8 +34,8 @@ def make_marker_string(data: dict) -> str:
     return "{" + string[:-2] + "}"
 
 
-def format_argument(value: str) -> Any:
-    """ returns properly formated (int, bool, str) cypher argument """
+def format_argument(value: str):
+    """ returns properly formatted (int, bool, str) cypher argument """
     try:
         return int(value)
     except ValueError:
@@ -48,31 +47,22 @@ def format_argument(value: str) -> Any:
 
 def is_chapter(line: str) -> bool:
     marker = re.compile(r"\/\/ {(.*)}")  # look up for // {chapter: 1} type of info
-    if re.search(marker, line):
-        return True
-    return False
-
+    return True if re.search(marker, line) else False
 
 def is_node(line: str) -> bool:
-    node = re.compile(r"^\s*?\(([[:alnum:]]*?:[[:alnum:]]*)+(\s+{.*})?\)\s?(,|#.*)$")
-    if re.search(node, line):
-        return True
-    return False
+    node = re.compile(r"^\s*?\((([[:alnum:]]*)?:[[:alnum:]]+)+(\s+{.*})?\)\s?(,|#.*)$")
+    return True if re.search(node, line) else False
 
 
 def is_edge(line: str) -> bool:
     edge = re.compile(r"[^\s*]?\(.*\)<?-\[.*\].+\(.*\),?[\s#*]?$")
-    if re.search(edge, line):
-        return True
-    return False
+    return True if re.search(edge, line) else False
 
 
 def is_element(line: str) -> bool:
-    """ checks very loosley wether the line is an element or not """
-    loose_node = re.compile(r"\s*\(.*")
-    if re.search(loose_node, line):  # or re.search(edge, line):
-        return True
-    return False
+    """ checks wether the line is an element or not """
+    # loose_node = re.compile(r"\s*\(.*")
+    return is_node(line) or is_edge(line)
 
 
 def extract_markers(line: str) -> tuple:
@@ -91,8 +81,9 @@ def extract_markers(line: str) -> tuple:
                 print(line)
                 print(argument)
                 input()
-        return (head, args_dict, tail)
-    except Exception as ex:
+        return head, args_dict, tail
+    # no {arguments}, not even curly brackets
+    except Exception:
         return None
 
 
@@ -119,18 +110,18 @@ def line_by_line(lines: list) -> list:
                 for marker in chapter_markers:
                     arguments[marker] = chapter_markers[marker]
                 if arguments:
-                    new_lines.append(f"{head}{make_marker_string(arguments)}{tail}")
+                    new_lines.append(f"{head}{properties_to_string(arguments)}{tail}")
             else:
                 if chapter_markers:
                     if is_edge:
                         head, tail = line.split("]")
                         new_lines.append(
-                            f"{head} {make_marker_string(chapter_markers)}]{tail}"
+                            f"{head} {properties_to_string(chapter_markers)}]{tail}"
                         )
                     elif is_node:
                         head, tail = line.split(")")
                         new_lines.append(
-                            f"{head} {make_marker_string(chapter_markers)}){tail}"
+                            f"{head} {properties_to_string(chapter_markers)}){tail}"
                         )
         else:
             new_lines.append(line)
@@ -149,8 +140,10 @@ def main():
     print(f"Loaded file with {len(lines)} lines")
     new_lines = line_by_line(lines)
 
-    save_lines(filename, new_lines)
-    print(f"Saved {len(new_lines)} lines")
+    new_filename = save_lines(filename, new_lines)
+    print(f"Saved {len(new_lines)}")
+    new_path, new_base = os.path.split(new_filename)
+    print(f"to file {new_base} in the folder {new_path}")
 
 
 if __name__ == "__main__":
