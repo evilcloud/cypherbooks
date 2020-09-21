@@ -85,8 +85,20 @@ create
     (bob:Person {name: "Bob Pardee"}),
     (treadwellSister:Person {name: "Mr. Treadwell's sister"}),
     (treadwellHouse:Location {name: "Mr. Treadwell's house", type: "dwelling"}),
-
-
+    // {chapter: 13}
+    (mall:Location:Institution {name: "Mid-Village Mall"}),
+    (hollis:Person {name: "Hollis Write", leadership: true}),
+    (police:Institution {name: "police"}),
+    (adele:Person {name: "Adele T"}),
+    // {chapter: 14}
+    (dylar:Product {name: "Dylar", type: "drug"}),
+    (dimitros:Person {name: "Dimitros Costakis"}),
+    (elvis:Person {name: "Elvis Presley"}),
+    (grappa:Person {name: "Nicholas Grappa"}),
+    (lasher:Person {name: "Elliot Lasher"}),
+    // {chapter: 15}
+    (gladys:Person {name: "Gladys"}),
+    
 
 
 // I - WAVES AND RADIATION
@@ -95,6 +107,7 @@ create
     (hill)<-[:EMPLOYED_BY {chapter: 1}]-(protagonist),
     (hill)<-[:PART_OF {chapter: 1}]-(hitlerDept),
     (hitlerStudies)-[:SUBJECT_OF]->(hitlerDept),
+    (protagonist)-[:KNOWS_ABOUT]->(hitler),
     (hitlerStudies)-[:CREATED_BY]->(protagonist),
     (protagonist)-[:HEAD_OF]->(hitlerDept),
     (hill)<-[:HEAD_OF]-(chancellor),
@@ -189,4 +202,17 @@ create
     (bob)-[:FATHER_OF]->(denise),
     (treadwellSister)-[:SISTER_OF]->(treadwell),
     (treadwell)-[:LIVES_IN]->(treadwellHouse),
-    (treadwellSister)-[:LIVES_IN]->(treadwellHouse)
+    (treadwellSister)-[:LIVES_IN]->(treadwellHouse),
+    // {chapter: 13}
+    (treadwell)-[:LOCATED_IN {purpose: "lost"}]->(mall),
+    (treadwellSister)-[:LOCATED_IN {purpose: "lost"}]->(mall),
+    (hollis)-[:EMPLOYED_BY {position: "chief"}]->(police),
+    (adele)-[:EMPLOYED_BY {temporarily: true}]->(police),
+    // {chapter: 14}
+    (babette)-[:TAKES]->(dylar),
+    (dimitros)-[:MEMBER_OF]->(cultDept),
+    (dimitros)-[:KNOWS_ABOUT]->(elvis),
+    (murray)-[:KNOWS_ABOUT]->(elvis),
+    (grappa)-[:MEMBER_OF]->(cultDept),
+    (lasher)-[:MEMBER_OF]->(cultDept),
+    (gladys)-[:MOTHER_OF]->(elvis)
