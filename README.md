@@ -27,4 +27,6 @@ Currently the development has paused, as I am reviewing the entry criteria
 ![](media/ramanyana_graph.png)
 
 ![](media/made_in_japan.jpg)
-Made in Japan: Studies in Popular Music -- an academic study of the genealogy of Japanese popular music from revue to enka.
+Made in Japan: Studies in Popular Music -- an academic study of the genealogy of Japanese popular music from Takarazuka Revue to enka. J-pop and EDM are not addressed in the book.
+
+This book is the first attempt at non-fiction format. 
