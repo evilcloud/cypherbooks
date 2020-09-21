@@ -1,7 +1,9 @@
+from os import linesep, write
 import sys
 import os
 import logging
 import re
+from typing import Any, List
 
 
 def get_lines(filename: str) -> list:
@@ -9,7 +11,6 @@ def get_lines(filename: str) -> list:
     if not os.path.splitext(filename)[1] in (".cypher", ".cyp"):
         print("Please provide a valid cypher file")
         sys.exit()
-    lines = []
     try:
         with open(filename, "r") as f:
             lines = f.readlines()
@@ -18,87 +19,31 @@ def get_lines(filename: str) -> list:
     return lines
 
 
+def save_lines(filename: str, lines: list):
+    head, tail = os.path.split(filename)
+    new_filename = os.path.join(head, "NEW_" + tail)
+    print(f"saving {new_filename}")
+    with open(new_filename, "w") as f:
+        f.writelines(lines)
+
+
 def make_marker_string(data: dict) -> str:
+    """ returns a valid cypher argument string with provided markers """
     string = ""
     for key in data:
         string += f"{key}: {data[key]}, "
-    return string[:-2]
+    return "{" + string[:-2] + "}"
 
 
-# def check_marker(line: str) -> dict:
-#     properties_dict = dict()
-#     try:
-#         head, body_tail = line.split("{", 1)
-#         body, tail = body_tail.split("}", 1)
-#         properties = body.split(",")
-#         for prop in properties:
-#             try:
-#                 key, value = prop.split(":")
-#                 properties_dict[key] = value.strip()
-#             except Exception as ex:
-#                 print(line)
-#                 print(f"Something went wrong with the internal format: {ex}")
-#                 print(prop)
-#                 input("Press ENTER to continue or Ctrl+C to cancel the operation")
-#     except ValueError:  # entry does not contain properties
-#         pass
-#     return properties_dict
-
-
-# def re_mark(lines):
-#     marker_indicator = re.compile(
-#         r"\/\/ {(.*)}"
-#     )  # look up for // {chapter: 1} type of info
-#     running_markers = dict()
-#     for line in lines:
-#         found_markers = re.findall(marker_indicator, line)
-#         if found_markers and found_markers[0].count(":") > 0:
-#             # running marker found
-#             for marker in "".join(found_markers).split(","):
-#                 key, value = marker.split(":", 1)
-#                 running_markers[key] = value.strip()
-#         else:
-#             # must be an ordinary line, could be a node or edge
-#             properties_dict = dict()
-#             try:
-#                 head, body_tail = line.split("{", 1)
-#                 body, tail = body_tail.split("}", 1)
-#                 properties = body.split(",")
-#                 for prop in properties:
-#                     try:
-#                         key, value = prop.split(":")
-#                         properties_dict[key] = value.strip()
-#                     except Exception as ex:
-#                         print(
-#                             "Something is messed up. Better Ctrl-C to cancel. ENTER will let you continue"
-#                         )
-#                         print(ex)
-#                         print(line)
-#                         input("make the right choice")
-#                 for marker in running_markers:
-#                     properties_dict[marker] = running_markers[marker]
-#                     print(properties_dict)
-#             except Exception as ex:
-#                 pass
-
-
-def digit_or_string(value: str):
+def format_argument(value: str) -> Any:
+    """ returns properly formated (int, bool, str) cypher argument """
     try:
         return int(value)
     except ValueError:
-        return value.strip()
-
-
-# def chapter_marker(line: str) -> tuple:
-#     marker = re.compile(r"\/\/ {(.*)}")  # look up for // {chapter: 1} type of info
-#     delimiter = ":"
-#     found = re.findall(marker, line)
-#     found = found[0] if found else None
-#     if not found or delimiter not in line:
-#         return None  # No valid chapter marker found
-#     key, val = found.split(delimiter)
-#     value = digit_or_string(val)
-#     return (key, value)
+        value = value.strip().strip("'").strip('"')
+        if value in ("true", "True", "false", "False"):
+            return value
+        return f'"{value}"'
 
 
 def is_chapter(line: str) -> bool:
@@ -108,9 +53,22 @@ def is_chapter(line: str) -> bool:
     return False
 
 
+def is_node(line: str) -> bool:
+    node = re.compile(r"^\s*?\(([[:alnum:]]*?:[[:alnum:]]*)+(\s+{.*})?\)\s?(,|#.*)$")
+    if re.search(node, line):
+        return True
+    return False
+
+
+def is_edge(line: str) -> bool:
+    edge = re.compile(r"[^\s*]?\(.*\)<?-\[.*\].+\(.*\),?[\s#*]?$")
+    if re.search(edge, line):
+        return True
+    return False
+
+
 def is_element(line: str) -> bool:
-    # node = re.compile(r"\s*\(.*\)($|\s|\s#.*)")
-    # edge = re.compile(r"\s*\(.*\)(-|<-)(\[.*])(-|->)\(.*\)($|\s|\s#.*)")
+    """ checks very loosley wether the line is an element or not """
     loose_node = re.compile(r"\s*\(.*")
     if re.search(loose_node, line):  # or re.search(edge, line):
         return True
@@ -125,36 +83,58 @@ def extract_markers(line: str) -> tuple:
         for argument in arguments.split(","):
             try:
                 arg_key, arg_val = argument.split(":")
-                args_dict[arg_key] = digit_or_string(arg_val)
+                arg_key = arg_key.strip()
+                args_dict[arg_key] = format_argument(arg_val)
             except Exception as ex:
                 print("something serious went down")
                 print(ex)
                 print(line)
+                print(argument)
                 input()
         return (head, args_dict, tail)
     except Exception as ex:
-        print("no arguments")
-        print(line)
-        input()
+        return None
 
 
 def line_by_line(lines: list) -> list:
-    # ch_marker = {}
-    for line in lines:
+    """ returns the same cypher, but with chapter properties inserted at the end of each element"""
+    new_lines = []  # the main variable to be returned
+    chapter_markers = {}  # dict for running parts, chapters etc.
+    for line in lines:  # the main loop
 
-        # # chapter markers
-        # chapter = chapter_marker(line)
-        # chapter_markers = {}
-        # if chapter:
-        #     key, value = chapter
-        #     chapter_markers[key] = value
-
-        # chapter markers
+        # detect parts, chapters
         if is_chapter(line):
-            print(extract_markers(line))
-        # element markers
-        if is_element(line):
-            extract_markers(line)
+            _, chapter_args, _ = extract_markers(line)
+            for chapter_arg in chapter_args:
+                chapter_markers[chapter_arg] = chapter_args[chapter_arg]
+            new_lines.append(
+                line
+            )  # the original line is still necessary to retain original form
+
+        # detect nodes or edges
+        elif is_element(line):
+            ex_markers = extract_markers(line)
+            if ex_markers:
+                head, arguments, tail = ex_markers
+                for marker in chapter_markers:
+                    arguments[marker] = chapter_markers[marker]
+                if arguments:
+                    new_lines.append(f"{head}{make_marker_string(arguments)}{tail}")
+            else:
+                if chapter_markers:
+                    if is_edge:
+                        head, tail = line.split("]")
+                        new_lines.append(
+                            f"{head} {make_marker_string(chapter_markers)}]{tail}"
+                        )
+                    elif is_node:
+                        head, tail = line.split(")")
+                        new_lines.append(
+                            f"{head} {make_marker_string(chapter_markers)}){tail}"
+                        )
+        else:
+            new_lines.append(line)
+    return new_lines
 
 
 def main():
@@ -163,10 +143,14 @@ def main():
         filename = args[1]
     else:
         print("launching default setting")
-        filename = ["", "../cypher/delillo_white_noise.cypher"]
+        filename = "../cypher/delillo_white_noise.cypher"
+    print(f"file: {filename}")
     lines = get_lines(filename)
     print(f"Loaded file with {len(lines)} lines")
-    line_by_line(lines)
+    new_lines = line_by_line(lines)
+
+    save_lines(filename, new_lines)
+    print(f"Saved {len(new_lines)} lines")
 
 
 if __name__ == "__main__":
