@@ -85,8 +85,20 @@ create
     (bob:Person {name: "Bob Pardee"}),
     (treadwellSister:Person {name: "Mr. Treadwell's sister"}),
     (treadwellHouse:Location {name: "Mr. Treadwell's house", type: "dwelling"}),
-
-
+    // {chapter: 13}
+    (mall:Location:Institution {name: "Mid-Village Mall"}),
+    (hollis:Person {name: "Hollis Write", leadership: true}),
+    (police:Institution {name: "police"}),
+    (adele:Person {name: "Adele T"}),
+    // {chapter: 14}
+    (dylar:Product {name: "Dylar", type: "drug"}),
+    (dimitros:Person {name: "Dimitros Costakis"}),
+    (elvis:Person {name: "Elvis Presley"}),
+    (grappa:Person {name: "Nicholas Grappa"}),
+    (lasher:Person {name: "Elliot Lasher"}),
+    // {chapter: 15}
+    (gladys:Person {name: "Gladys"}),
+    
 
 
 // I - WAVES AND RADIATION
@@ -95,6 +107,7 @@ create
     (hill)<-[:EMPLOYED_BY {chapter: 1, part: 1}]-(protagonist),
     (hill)<-[:PART_OF {chapter: 1, part: 1}]-(hitlerDept),
     (hitlerStudies)-[:SUBJECT_OF {part: 1, chapter: 1}]->(hitlerDept),
+    (protagonist)-[:KNOWS_ABOUT {part: 1, chapter: 1}]->(hitler),
     (hitlerStudies)-[:CREATED_BY {part: 1, chapter: 1}]->(protagonist),
     (protagonist)-[:HEAD_OF {part: 1, chapter: 1}]->(hitlerDept),
     (hill)<-[:HEAD_OF {part: 1, chapter: 1}]-(chancellor),
@@ -189,4 +202,17 @@ create
     (bob)-[:FATHER_OF {part: 1, chapter: 12}]->(denise),
     (treadwellSister)-[:SISTER_OF {part: 1, chapter: 12}]->(treadwell),
     (treadwell)-[:LIVES_IN {part: 1, chapter: 12}]->(treadwellHouse),
-    (treadwellSister)-[:LIVES_IN {part: 1, chapter: 12}]->(treadwellHouse)
+    (treadwellSister)-[:LIVES_IN {part: 1, chapter: 12}]->(treadwellHouse),
+    // {chapter: 13}
+    (treadwell)-[:LOCATED_IN {purpose: "lost", part: 1, chapter: 13}]->(mall),
+    (treadwellSister)-[:LOCATED_IN {purpose: "lost", part: 1, chapter: 13}]->(mall),
+    (hollis)-[:EMPLOYED_BY {position: "chief", part: 1, chapter: 13}]->(police),
+    (adele)-[:EMPLOYED_BY {temporarily: true, part: 1, chapter: 13}]->(police),
+    // {chapter: 14}
+    (babette)-[:TAKES {part: 1, chapter: 14}]->(dylar),
+    (dimitros)-[:MEMBER_OF {part: 1, chapter: 14}]->(cultDept),
+    (dimitros)-[:KNOWS_ABOUT {part: 1, chapter: 14}]->(elvis),
+    (murray)-[:KNOWS_ABOUT {part: 1, chapter: 14}]->(elvis),
+    (grappa)-[:MEMBER_OF {part: 1, chapter: 14}]->(cultDept),
+    (lasher)-[:MEMBER_OF {part: 1, chapter: 14}]->(cultDept),
+    (gladys)-[:MOTHER_OF {part: 1, chapter: 14}]->(elvis)
