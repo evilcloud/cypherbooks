@@ -10,9 +10,9 @@ All within the philosophy of the comic above.
 
 Currently there are:
 
-## CHAPTER_MAKER
+## CHAPTERS
 
-A small utility, which will scan your cypher file for chapters in the following format:
+A small utility, which will scan your cypher file for chapters which are declared like this:
 
 ```
 // Not captured
@@ -26,7 +26,7 @@ A small utility, which will scan your cypher file for chapters in the following 
     (nothing)-[:NOT_FOLLOWED_BY]->(something)
 ```
 
-and insert the chapter formation into properties like that:
+and insert the chapter formations into properties like that:
 
 ```
 // Not captured
@@ -42,6 +42,8 @@ and insert the chapter formation into properties like that:
 
 The format of the chapter declaration is `// {}'. Tabs and spaces are ignored (but kept). Only the values within the first curly brackets in the line are captured.
 
-The chapter values are compoundable and replaceable if the key is the same. No automatic number increase is enabled, since it presents more issues than solution. The magic is brought to the minimum.
+The chapter values are compoundable (any number of divisions possible to be marked -- chapters, parts, tomes, whatever) and replaceable if the key is the same. No automatic number increase is enabled, since it presents more issues than solution. The magic is brought to the minimum.
+
+Currently only simple patterns are supported, that is `(node {full_syntaxis_possible: true})-[:RELATIONSHIP {bi_directional: true}]->(node)`. In the relationship command only the edge part will be evaluated, and nodes ignored. To work with nodes, individual node statements are necessary.
 
 The "ongoing development" stage is definitely on, as I am trying to rewrite the whole thing is some niche language like [Nim](https://nim-lang.org/) or [V](https://vlang.io/)
