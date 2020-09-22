@@ -1,4 +1,5 @@
 create
+// NODES
 // I - WAVES AND RADIATION 
 // {part: 1}
     // {chapter: 1}
@@ -48,13 +49,13 @@ create
     (barn:Institution:Location {name: "tourist barn", fullName: "The most photographed barn in America", part: 1, chapter: 3}),
     (farmington:Location {name: "Farmington", type: "settlement", part: 1, chapter: 3}),
     // {chapter: 4}
-    (bee:Person {name: "Bee", child: true}),
+    (bee:Person {name: "Bee", child: true, age: 12}),
     (tweedy:Person {name: "Tweedy Browner"}),
     (korea:Location {name: "South Korea", type: "country"}),
     (eroticFic:Item {name: "erotic fiction"}),
     // {chapter: 5}
     // {chapter: 6}
-    (devi:Person {name: "Mother Devi"}),
+    (devi:Person {name: "Mother Devi", fullName: "Janet Savory"}),
     (ashram:Location {name: "ashram", fullName: "Dharamsalapur", type: "community"}),
     (tubb:Location {name: "Tubb MT", type: "settlement"}),
     (artsDuplex:Location {name: "Arts Duplex", type: "building"}),
@@ -98,9 +99,17 @@ create
     (lasher:Person {name: "Elliot Lasher"}),
     // {chapter: 15}
     (gladys:Person {name: "Gladys"}),
-    
+    // {chapter: 16}
+    (compCenter:Institution {name: "computer center"}),
+    (eric:Person {name: "Eric Massingale"}),
+    // {chapter: 17}
+    // {chapter: 18}
+    (malcom:Person {name: "Malcom Hunt"}),
+    (indonesia:Location {name: "Indonesia", type: "country"}),
+    (quadaffi:Person {name: "Colonel Quadaffi", fullName: "Gadaffi"}),
+    // {chapter: 19}
 
-
+// EDGES
 // I - WAVES AND RADIATION
 // {part:1}
     // {chapter: 1}
@@ -216,3 +225,16 @@ create
     (grappa)-[:MEMBER_OF]->(cultDept),
     (lasher)-[:MEMBER_OF]->(cultDept),
     (gladys)-[:MOTHER_OF]->(elvis)
+    // {chapter: 16}
+    (compCenter)-[:MEMBER_OF]->(hill),
+    (eric)-[:MEMBER_OF]->(compCenter)
+    // {chapter: 17}
+    // {chapter: 18}
+    (malcom)-[:MARRIED_TO]->(tweedy),
+    (bee)-[:LOCATED_IN]->(indonesia),
+    (malcom)-[:LOCATED_IN]->(indonesia),
+    (malcom)-[:EMPLOYED_BY]->(cia),
+    (malcom)-[:MEMBER_OF]->(cia),
+    (tweedy)-[:KNOWS]->(quadaffi),
+    (malcom)-[:KNOWS]->(quadaffi),
+    // {chapter: 19}
