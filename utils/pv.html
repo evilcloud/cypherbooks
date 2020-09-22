@@ -1,0 +1,216 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1>None</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 95%;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+        #loadingBar {
+            position:absolute;
+            top:0px;
+            left:0px;
+            width: 100%;
+            height: 95%;
+            background-color:rgba(200,200,200,0.8);
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -ms-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+            opacity:1;
+        }
+
+        #bar {
+            position:absolute;
+            top:0px;
+            left:0px;
+            width:20px;
+            height:20px;
+            margin:auto auto auto auto;
+            border-radius:11px;
+            border:2px solid rgba(30,30,30,0.05);
+            background: rgb(0, 173, 246); /* Old browsers */
+            box-shadow: 2px 0px 4px rgba(0,0,0,0.4);
+        }
+
+        #border {
+            position:absolute;
+            top:10px;
+            left:10px;
+            width:500px;
+            height:23px;
+            margin:auto auto auto auto;
+            box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
+            border-radius:10px;
+        }
+
+        #text {
+            position:absolute;
+            top:8px;
+            left:530px;
+            width:30px;
+            height:50px;
+            margin:auto auto auto auto;
+            font-size:22px;
+            color: #000000;
+        }
+
+        div.outerBorder {
+            position:relative;
+            top:400px;
+            width:600px;
+            height:44px;
+            margin:auto auto auto auto;
+            border:8px solid rgba(0,0,0,0.1);
+            background: rgb(252,252,252); /* Old browsers */
+            background: -moz-linear-gradient(top,  rgba(252,252,252,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,252,252,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* IE10+ */
+            background: linear-gradient(to bottom,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+            border-radius:72px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+        }
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+<div id="loadingBar">
+    <div class="outerBorder">
+        <div id="text">0%</div>
+        <div id="border">
+            <div id="bar"></div>
+        </div>
+    </div>
+</div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"id": "hill", "label": "College-on-the-Hill", "shape": "dot"}, {"id": "protagonist,", "label": "protagonist,", "shape": "dot"}, {"id": "hitlerDept,", "label": "hitlerDept,", "shape": "dot"}, {"id": "hitlerStudies", "label": "Hitler Studies", "shape": "dot"}, {"id": "protagonist", "label": "Jack Gladney", "shape": "dot"}, {"id": "hitler,", "label": "hitler,", "shape": "dot"}, {"id": "chancellor,", "label": "chancellor,", "shape": "dot"}, {"id": "chancellor", "label": "chancellor of College-on-Hill", "shape": "dot"}, {"id": "nixon,", "label": "nixon,", "shape": "dot"}, {"id": "ford,", "label": "ford,", "shape": "dot"}, {"id": "carter,", "label": "carter,", "shape": "dot"}, {"id": "austria,", "label": "austria,", "shape": "dot"}, {"id": "babette,", "label": "babette,", "shape": "dot"}, {"id": "volunteers", "label": "volunteering group", "shape": "dot"}, {"id": "blind,", "label": "blind,", "shape": "dot"}, {"id": "babette", "label": "Babette", "shape": "dot"}, {"id": "volunteers,", "label": "volunteers,", "shape": "dot"}, {"id": "adEd,", "label": "adEd,", "shape": "dot"}, {"id": "treadwell,", "label": "treadwell,", "shape": "dot"}, {"id": "treadwell", "label": "Treadwell", "shape": "dot"}, {"id": "natEnquirer,", "label": "natEnquirer,", "shape": "dot"}, {"id": "natExaminer,", "label": "natExaminer,", "shape": "dot"}, {"id": "natExpress,", "label": "natExpress,", "shape": "dot"}, {"id": "globe,", "label": "globe,", "shape": "dot"}, {"id": "world,", "label": "world,", "shape": "dot"}, {"id": "star,", "label": "star,", "shape": "dot"}, {"id": "stationwagon,", "label": "stationwagon,", "shape": "dot"}, {"id": "wilder,", "label": "wilder,", "shape": "dot"}, {"id": "wilder", "label": "Wilder", "shape": "dot"}, {"id": "home,", "label": "home,", "shape": "dot"}, {"id": "home", "label": "Home", "shape": "dot"}, {"id": "bedroom,", "label": "bedroom,", "shape": "dot"}, {"id": "kitchen,", "label": "kitchen,", "shape": "dot"}, {"id": "denise", "label": "Denise", "shape": "dot"}, {"id": "steffie", "label": "Steffie", "shape": "dot"}, {"id": "heinrich", "label": "Heinrich", "shape": "dot"}, {"id": "cultDept", "label": "culture deartment", "shape": "dot"}, {"id": "centuryHall,", "label": "centuryHall,", "shape": "dot"}, {"id": "hitlerDept", "label": "department of Hitler Studies", "shape": "dot"}, {"id": "alfonse", "label": "Alfonse", "shape": "dot"}, {"id": "cultDept,", "label": "cultDept,", "shape": "dot"}, {"id": "murray", "label": "Murray", "shape": "dot"}, {"id": "roomingHouse,", "label": "roomingHouse,", "shape": "dot"}, {"id": "womanWithSecret", "label": "a woman who harbors a terrible secret", "shape": "dot"}, {"id": "hautedMan", "label": "a man with a hauted look", "shape": "dot"}, {"id": "dunlop", "label": "Howard Dunlop", "shape": "dot"}, {"id": "letterboxWoman", "label": "a woman who stnds by the letterbox for hours", "shape": "dot"}, {"id": "noPastMan", "label": "a man with no past", "shape": "dot"}, {"id": "blacksmith,", "label": "blacksmith,", "shape": "dot"}, {"id": "roomingHouse", "label": "rooming house", "shape": "dot"}, {"id": "asylum", "label": "Insane asylum", "shape": "dot"}, {"id": "barn", "label": "tourist barn", "shape": "dot"}, {"id": "farmington,", "label": "farmington,", "shape": "dot"}, {"id": "barn,", "label": "barn,", "shape": "dot"}, {"id": "bee", "label": "Bee", "shape": "dot"}, {"id": "tweedy,", "label": "tweedy,", "shape": "dot"}, {"id": "steffie,", "label": "steffie,", "shape": "dot"}, {"id": "korea,", "label": "korea,", "shape": "dot"}, {"id": "eroticFic,", "label": "eroticFic,", "shape": "dot"}, {"id": "devi,", "label": "devi,", "shape": "dot"}, {"id": "devi", "label": "Mother Devi", "shape": "dot"}, {"id": "ashram,", "label": "ashram,", "shape": "dot"}, {"id": "ashram", "label": "ashram", "shape": "dot"}, {"id": "tubb,", "label": "tubb,", "shape": "dot"}, {"id": "advNazism", "label": "Advanced Nazism", "shape": "dot"}, {"id": "hitlerStudies,", "label": "hitlerStudies,", "shape": "dot"}, {"id": "advNazism,", "label": "advNazism,", "shape": "dot"}, {"id": "church,", "label": "church,", "shape": "dot"}, {"id": "german,", "label": "german,", "shape": "dot"}, {"id": "tommyRoy", "label": "Tommy Roy Foster", "shape": "dot"}, {"id": "prison,", "label": "prison,", "shape": "dot"}, {"id": "prison", "label": "prison", "shape": "dot"}, {"id": "ironCity,", "label": "ironCity,", "shape": "dot"}, {"id": "tommyRoy,", "label": "tommyRoy,", "shape": "dot"}, {"id": "dana", "label": "Dana Breedlove", "shape": "dot"}, {"id": "cia,", "label": "cia,", "shape": "dot"}, {"id": "spanish,", "label": "spanish,", "shape": "dot"}, {"id": "portugese,", "label": "portugese,", "shape": "dot"}, {"id": "eugene", "label": "Eugene", "shape": "dot"}, {"id": "babetteEx,", "label": "babetteEx,", "shape": "dot"}, {"id": "babetteEx", "label": "Babettes ex", "shape": "dot"}, {"id": "australia,", "label": "australia,", "shape": "dot"}, {"id": "greek,", "label": "greek,", "shape": "dot"}, {"id": "latin,", "label": "latin,", "shape": "dot"}, {"id": "sailing,", "label": "sailing,", "shape": "dot"}, {"id": "meteorology,", "label": "meteorology,", "shape": "dot"}, {"id": "bob", "label": "Bob Pardee", "shape": "dot"}, {"id": "denise,", "label": "denise,", "shape": "dot"}, {"id": "treadwellSister", "label": "Mr. Treadwells sister", "shape": "dot"}, {"id": "treadwellHouse,", "label": "treadwellHouse,", "shape": "dot"}, {"id": "mall,", "label": "mall,", "shape": "dot"}, {"id": "hollis", "label": "Hollis Write", "shape": "dot"}, {"id": "police,", "label": "police,", "shape": "dot"}, {"id": "adele", "label": "Adele T", "shape": "dot"}, {"id": "dylar,", "label": "dylar,", "shape": "dot"}, {"id": "dimitros", "label": "Dimitros Costakis", "shape": "dot"}, {"id": "elvis,", "label": "elvis,", "shape": "dot"}, {"id": "grappa", "label": "Nicholas Grappa", "shape": "dot"}, {"id": "lasher", "label": "Elliot Lasher", "shape": "dot"}, {"id": "gladys", "label": "Gladys", "shape": "dot"}, {"id": "elvis", "label": "elvis", "shape": "dot"}, {"id": "compCenter", "label": "computer center", "shape": "dot"}, {"id": "hill,", "label": "hill,", "shape": "dot"}, {"id": "eric", "label": "Eric Massingale", "shape": "dot"}, {"id": "malcom", "label": "Malcom Hunt", "shape": "dot"}, {"id": "indonesia,", "label": "indonesia,", "shape": "dot"}, {"id": "tweedy", "label": "Tweedy Browner", "shape": "dot"}, {"id": "quadaffi,", "label": "quadaffi,", "shape": "dot"}]);
+        edges = new vis.DataSet([{"from": "hill", "to": "protagonist,"}, {"from": "hill", "to": "hitlerDept,"}, {"from": "hitlerStudies", "to": "hitlerDept,"}, {"from": "protagonist", "to": "hitler,"}, {"from": "hitlerStudies", "to": "protagonist,"}, {"from": "protagonist", "to": "hitlerDept,"}, {"from": "hill", "to": "chancellor,"}, {"from": "chancellor", "to": "nixon,"}, {"from": "chancellor", "to": "ford,"}, {"from": "chancellor", "to": "carter,"}, {"from": "chancellor", "to": "austria,"}, {"from": "protagonist", "to": "babette,"}, {"from": "volunteers", "to": "blind,"}, {"from": "babette", "to": "volunteers,"}, {"from": "babette", "to": "adEd,"}, {"from": "babette", "to": "treadwell,"}, {"from": "treadwell", "to": "blind,"}, {"from": "treadwell", "to": "natEnquirer,"}, {"from": "treadwell", "to": "natExaminer,"}, {"from": "treadwell", "to": "natExpress,"}, {"from": "treadwell", "to": "globe,"}, {"from": "treadwell", "to": "world,"}, {"from": "treadwell", "to": "star,"}, {"from": "protagonist", "to": "stationwagon,"}, {"from": "babette", "to": "stationwagon,"}, {"from": "babette", "to": "wilder,"}, {"from": "wilder", "to": "home,"}, {"from": "babette", "to": "home,"}, {"from": "protagonist", "to": "home,"}, {"from": "home", "to": "bedroom,"}, {"from": "home", "to": "kitchen,"}, {"from": "denise", "to": "babette,"}, {"from": "denise", "to": "home,"}, {"from": "steffie", "to": "home,"}, {"from": "heinrich", "to": "protagonist,"}, {"from": "heinrich", "to": "home,"}, {"from": "cultDept", "to": "centuryHall,"}, {"from": "hitlerDept", "to": "centuryHall,"}, {"from": "alfonse", "to": "cultDept,"}, {"from": "murray", "to": "cultDept,"}, {"from": "murray", "to": "roomingHouse,"}, {"from": "womanWithSecret", "to": "roomingHouse,"}, {"from": "hautedMan", "to": "roomingHouse,"}, {"from": "dunlop", "to": "roomingHouse,"}, {"from": "letterboxWoman", "to": "roomingHouse,"}, {"from": "noPastMan", "to": "roomingHouse,"}, {"from": "home", "to": "blacksmith,"}, {"from": "hill", "to": "blacksmith,"}, {"from": "roomingHouse", "to": "blacksmith,"}, {"from": "asylum", "to": "blacksmith,"}, {"from": "barn", "to": "farmington,"}, {"from": "protagonist", "to": "barn,"}, {"from": "murray", "to": "barn,"}, {"from": "bee", "to": "protagonist,"}, {"from": "bee", "to": "tweedy,"}, {"from": "bee", "to": "steffie,"}, {"from": "bee", "to": "korea,"}, {"from": "babette", "to": "eroticFic,"}, {"from": "chancellor", "to": "protagonist,"}, {"from": "heinrich", "to": "devi,"}, {"from": "devi", "to": "ashram,"}, {"from": "ashram", "to": "tubb,"}, {"from": "advNazism", "to": "hitlerStudies,"}, {"from": "protagonist", "to": "advNazism,"}, {"from": "babette", "to": "church,"}, {"from": "protagonist", "to": "german,"}, {"from": "dunlop", "to": "german,"}, {"from": "dunlop", "to": "protagonist,"}, {"from": "murray", "to": "babette,"}, {"from": "tommyRoy", "to": "prison,"}, {"from": "prison", "to": "ironCity,"}, {"from": "heinrich", "to": "tommyRoy,"}, {"from": "dana", "to": "cia,"}, {"from": "dana", "to": "spanish,"}, {"from": "dana", "to": "portugese,"}, {"from": "eugene", "to": "babetteEx,"}, {"from": "eugene", "to": "babette,"}, {"from": "babetteEx", "to": "wilder,"}, {"from": "babetteEx", "to": "australia,"}, {"from": "eugene", "to": "australia,"}, {"from": "dunlop", "to": "greek,"}, {"from": "dunlop", "to": "latin,"}, {"from": "dunlop", "to": "sailing,"}, {"from": "dunlop", "to": "meteorology,"}, {"from": "bob", "to": "denise,"}, {"from": "treadwellSister", "to": "treadwell,"}, {"from": "treadwell", "to": "treadwellHouse,"}, {"from": "treadwellSister", "to": "treadwellHouse,"}, {"from": "treadwell", "to": "mall,"}, {"from": "treadwellSister", "to": "mall,"}, {"from": "hollis", "to": "police,"}, {"from": "adele", "to": "police,"}, {"from": "babette", "to": "dylar,"}, {"from": "dimitros", "to": "cultDept,"}, {"from": "dimitros", "to": "elvis,"}, {"from": "murray", "to": "elvis,"}, {"from": "grappa", "to": "cultDept,"}, {"from": "lasher", "to": "cultDept,"}, {"from": "gladys", "to": "elvis"}, {"from": "compCenter", "to": "hill,"}, {"from": "eric", "to": "compCenter"}, {"from": "malcom", "to": "tweedy,"}, {"from": "bee", "to": "indonesia,"}, {"from": "malcom", "to": "indonesia,"}, {"from": "malcom", "to": "cia,"}, {"from": "tweedy", "to": "quadaffi,"}, {"from": "malcom", "to": "quadaffi,"}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+
+        
+
+
+        
+        network.on("stabilizationProgress", function(params) {
+      		document.getElementById('loadingBar').removeAttribute("style");
+	        var maxWidth = 496;
+	        var minWidth = 20;
+	        var widthFactor = params.iterations/params.total;
+	        var width = Math.max(minWidth,maxWidth * widthFactor);
+
+	        document.getElementById('bar').style.width = width + 'px';
+	        document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';
+	    });
+	    network.once("stabilizationIterationsDone", function() {
+	        document.getElementById('text').innerHTML = '100%';
+	        document.getElementById('bar').style.width = '496px';
+	        document.getElementById('loadingBar').style.opacity = 0;
+	        // really clean the dom element
+	        setTimeout(function () {document.getElementById('loadingBar').style.display = 'none';}, 500);
+	    });
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

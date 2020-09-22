@@ -98,6 +98,8 @@ create
     (lasher:Person {name: "Elliot Lasher"}),
     // {chapter: 15}
     (gladys:Person {name: "Gladys"}),
+    (testing:Test),
+    (:Test2),
     
 
 

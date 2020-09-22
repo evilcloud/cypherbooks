@@ -18,6 +18,10 @@ The book is broken down into Parts and Chapters.
 Current state of progress (as of the time of this document -- chapter 10)
 ![](media/white_noise_graph.png)
 
+there is also the HTML version of the same database (incomplete) generated with pyvi framework
+
+![](media/pyvi_white_noise.png)
+
 ## रामायणम्
 
 ![](media/ramayana.jpg)
@@ -31,4 +35,4 @@ Currently the development has paused, as I am reviewing the entry criteria
 ![](media/made_in_japan.jpg)
 an academic study of the genealogy of Japanese popular music from Takarazuka Revue to Enka. J-pop and EDM are not addressed in the book.
 
-This book is the first attempt at non-fiction format. 
+This book is the first attempt at non-fiction format.

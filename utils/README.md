@@ -47,3 +47,11 @@ The chapter values are compoundable (any number of divisions possible to be mark
 Currently only simple patterns are supported, that is `(node {full_syntaxis_possible: true})-[:RELATIONSHIP {bi_directional: true}]->(node)`. In the relationship command only the edge part will be evaluated, and nodes ignored. To work with nodes, individual node statements are necessary.
 
 The "ongoing development" stage is definitely on, as I am trying to rewrite the whole thing is some niche language like [Nim](https://nim-lang.org/) or [V](https://vlang.io/)
+
+## DRAW_PYVI
+
+for those, who don't want to fire up Neo4j every time they want to see the general outline of relationships between elements -- parses cypher straight into html (pyvi with JS, I assume).
+
+Currently terrible code -- real kludge, because, I don't know, I was tired or something.
+
+![](../media/pyvi_white_noise.png)
