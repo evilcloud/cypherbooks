@@ -113,13 +113,13 @@ create
 // I - WAVES AND RADIATION
 // {part:1}
     // {chapter: 1}
-    (hill)<-[:EMPLOYED_BY {chapter: 1}]-(protagonist),
-    (hill)<-[:PART_OF {chapter: 1}]-(hitlerDept),
+    // (hill)<-[:EMPLOYED_BY {chapter: 1}]-(protagonist),
+    (hill)<-[:MEMBER_OF {capacity: "department"}]-(hitlerDept),
     (hitlerStudies)-[:SUBJECT_OF]->(hitlerDept),
     (protagonist)-[:KNOWS_ABOUT]->(hitler),
     (hitlerStudies)-[:CREATED_BY]->(protagonist),
-    (protagonist)-[:HEAD_OF]->(hitlerDept),
-    (hill)<-[:HEAD_OF]-(chancellor),
+    (protagonist)-[:MEMBER_OF {capacity: "employment", leadership: true}]->(hitlerDept),
+    (hill)<-[:MEMBER_OF {capacity: "employement", leadership: true}]-(chancellor),
     (chancellor)-[:ASSIST]->(nixon),
     (chancellor)-[:ASSIST]->(ford),
     (chancellor)-[:ASSIST]->(carter),
@@ -130,7 +130,7 @@ create
     (babette)-[:MEMBER_OF]->(volunteers),
     (babette)-[:TEACHES]->(adEd),
     (babette)-[:READ]->(treadwell),
-    (treadwell)-[:MEMBER_OF]->(blind),
+    (treadwell)-[:MEMBER_OF {capacity: "membership"}]->(blind),
     (treadwell)-[:LIKES]->(natEnquirer),
     (treadwell)-[:LIKES]->(natExaminer),
     (treadwell)-[:LIKES]->(natExpress),
@@ -139,22 +139,20 @@ create
     (treadwell)-[:LIKES]->(star),
     (protagonist)-[:OWNS]->(stationwagon),
     (babette)-[:OWNS]->(stationwagon),
-    (babette)-[:MOTHER_OF]->(wilder),
+    (babette)-[:PARENT_OF {capacity: "mother"}]->(wilder),
     (wilder)-[:LIVES_IN]->(home),
     (babette)-[:LIVES_IN]->(home),
     (protagonist)-[:LIVES_IN]->(home),
-    (home)<-[:MEMBER_OF]-(bedroom),
-    (home)<-[:MEMBER_OF]-(kitchen),
-    (denise)<-[:MOTHER_OF]-(babette),
+    (denise)<-[:PARENT_OF {capacity: "mother"}]-(babette),
     (denise)-[:LIVES_IN]->(home),
     (steffie)-[:LIVES_IN]->(home),
-    (heinrich)<-[:FATHER_OF]-(protagonist),
+    (heinrich)<-[:PARENT_OF {capacity: "father"}]-(protagonist),
     (heinrich)-[:LIVES_IN]->(home),
     // {chapter: 3}
     (cultDept)-[:LOCATED_IN]->(centuryHall),
     (hitlerDept)-[:LOCATED_IN]->(centuryHall),
-    (alfonse)-[:HEAD_OF]->(cultDept),
-    (murray)-[:MEMBER_OF {position: "visiting lecturer"}]->(cultDept),
+    (alfonse)-[:MEMBER_OF {capacity: "employment", leadership: true}]->(cultDept),
+    (murray)-[:MEMBER_OF {capacity: "employment", position: "visiting lecturer"}]->(cultDept),
     (murray)-[:LIVES_IN {role: "The Jew", permanent: false}]->(roomingHouse),
     (womanWithSecret)-[:LIVES_IN {permanent: true}]->(roomingHouse),
     (hautedMan)-[:LIVES_IN {permanent: true}]->(roomingHouse),
@@ -169,15 +167,15 @@ create
     (protagonist)-[:TRAVEL_TO]->(barn),
     (murray)-[:TRAVEL_TO]->(barn),
     // {chapter: 4}
-    (bee)<-[:FATHER_OF]-(protagonist),
-    (bee)<-[:MOTHER_OF]-(tweedy),
+    (bee)<-[:PARENT_OF {capacity: "father"}]-(protagonist),
+    (bee)<-[:PARENT_OF {capacity: "mother"}]-(tweedy),
     (bee)-[:KNOWS]->(steffie),
     (bee)-[:LIVES_IN {current: false}]->(korea),
     (babette)-[:READ]->(eroticFic),
     (chancellor)-[:ASSIST {type: "identity"}]->(protagonist),
     // {chapter: 5}
     // {chapter: 6}
-    (heinrich)<-[:MOTHER_OF]-(devi),
+    (heinrich)<-[:PARENT_OF {capacity: "mother"}]-(devi),
     (devi)-[:LIVES_IN]->(ashram),
     (ashram)-[:LOCATED_IN]->(tubb),
     (advNazism)-[:SUBJECT_OF]->(hitlerStudies),
@@ -187,7 +185,7 @@ create
     // {chapter: 8}
     (protagonist)-[:NOT_KNOWS]->(german),
     (dunlop)-[:KNOWS]->(german),
-    (dunlop)-[:TEACHES]->(protagonist),
+    (dunlop)-[:TEACHES {subject: "German"}]->(protagonist),
     // {chapter: 9}
     (murray)-[:AFFINITY_TO]->(babette),
     // {chapter: 10}
@@ -195,12 +193,12 @@ create
     (prison)-[:LOCATED_IN]->(ironCity),
     (heinrich)-[:KNOWS {how: "playing chess"}]->(tommyRoy),
     // {chapter: 11}
-    (dana)-[:EMPLOYED_BY]->(cia),
+    (dana)-[:MEMBER_OF {capacity: "employment"}]->(cia),
     (dana)-[:KNOWS]->(spanish),
     (dana)-[:KNOWS]->(portugese),
-    (eugene)<-[:FATHER_OF]-(babetteEx),
-    (eugene)<-[:MOTHER_OF]-(babette),
-    (babetteEx)-[:FATHER_OF]->(wilder),
+    (eugene)<-[:PARENT_OF {capacity: "father"}]-(babetteEx),
+    (eugene)<-[:PARENT_OF {capacity: "mother"}]-(babette),
+    (babetteEx)-[:PARENT_OF {capacity: "father"}]->(wilder),
     (babetteEx)-[:LIVES_IN]->(australia),
     (eugene)-[:LIVES_IN]->(australia),
     // {chapter: 12}
@@ -208,33 +206,34 @@ create
     (dunlop)-[:KNOWS]->(latin),
     (dunlop)-[:KNOWS]->(sailing),
     (dunlop)-[:KNOWS]->(meteorology),
-    (bob)-[:FATHER_OF]->(denise),
+    (bob)-[:PARENT_OF {capacity: "father"}]->(denise),
     (treadwellSister)-[:SISTER_OF]->(treadwell),
     (treadwell)-[:LIVES_IN]->(treadwellHouse),
     (treadwellSister)-[:LIVES_IN]->(treadwellHouse),
     // {chapter: 13}
     (treadwell)-[:LOCATED_IN {purpose: "lost"}]->(mall),
     (treadwellSister)-[:LOCATED_IN {purpose: "lost"}]->(mall),
-    (hollis)-[:EMPLOYED_BY {position: "chief"}]->(police),
-    (adele)-[:EMPLOYED_BY {temporarily: true}]->(police),
+    (hollis)-[:MEMBER_OF {capacity: "employment", leadership: true, position: "chief"}]->(police),
+    (adele)-[:ASSIST {temporarily: true}]->(police),
     // {chapter: 14}
     (babette)-[:TAKES]->(dylar),
-    (dimitros)-[:MEMBER_OF]->(cultDept),
+    (dimitros)-[:MEMBER_OF {capacity: "employment"}]->(cultDept),
     (dimitros)-[:KNOWS_ABOUT]->(elvis),
     (murray)-[:KNOWS_ABOUT]->(elvis),
-    (grappa)-[:MEMBER_OF]->(cultDept),
-    (lasher)-[:MEMBER_OF]->(cultDept),
-    (gladys)-[:MOTHER_OF]->(elvis)
+    (grappa)-[:MEMBER_OF {capacity: "employment"}]->(cultDept),
+    (lasher)-[:MEMBER_OF {capacity: "employment"}]->(cultDept),
+    (gladys)-[:MOTHER_OF {capacity: "employment"}]->(elvis),
     // {chapter: 16}
     (compCenter)-[:MEMBER_OF]->(hill),
-    (eric)-[:MEMBER_OF]->(compCenter)
+    (eric)-[:MEMBER_OF {capacity: "employment"}]->(compCenter),
     // {chapter: 17}
     // {chapter: 18}
     (malcom)-[:MARRIED_TO]->(tweedy),
     (bee)-[:LOCATED_IN]->(indonesia),
     (malcom)-[:LOCATED_IN]->(indonesia),
-    (malcom)-[:EMPLOYED_BY]->(cia),
-    (malcom)-[:MEMBER_OF]->(cia),
+    (malcom)-[:MEMBER_OF {capacity: "employment"}]->(cia),
     (tweedy)-[:KNOWS]->(quadaffi),
-    (malcom)-[:KNOWS]->(quadaffi),
     // {chapter: 19}
+
+
+    ()
