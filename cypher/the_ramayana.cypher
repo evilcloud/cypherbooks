@@ -1,4 +1,5 @@
-// The Ramanyana by Maharishi Valmiki (attributed)
+// title: The Ramanyana by Maharishi Valmiki (attributed)
+// project: ramanyana
 
 // CHAPTER ONE — CHILDHOOD
 create 
@@ -28,21 +29,32 @@ create
     (agastyaBrother:Character {name: "Agastya's brother"}),
     (surpanaka:Rakasa {name: "Surpanaka"}),
     (surpanakaVassals:Rakasa {name: "Surpanaka's vassal raksas"}),
-    (khara:Rakasa {name: "Khara"})-[:IS]->(surpanakaVassals),
-    (trisiras:Rakasa {name: "Trisiras"})-[:IS]->(surpanakaVassals),
-    (dusana:Rakasa {name: "Disana"})-[:IS]->(surpanakaVassals),
+    (khara:Rakasa {name: "Khara"}),
+    (trisiras:Rakasa {name: "Trisiras"}),
+    (dusana:Rakasa {name: "Dusana"}),
     (ravana:Rakasa {name: "Ravana"}),
     (marica:Rakasa {name: "Marica"}),
-    (jatayu:Beast {name: "Janayu", type: "monkey"}),
     (kabanda:Rakasa {name: "Kabanda"}),
+    (jatayu:Beast {name: "Jatayu"}),
     (hanuman:Beast {name: "Hanuman"}),
+    (khara)-[:IS]->(surpanakaVassals),
+    (trisiras)-[:IS]->(surpanakaVassals),
+    (dusana)-[:IS]->(surpanakaVassals),
+    (ravana {name: "Ravana"}),
+    (marica {name: "Marica"}),
+    (jatayu {name: "Janayu", type: "monkey"}),
+    (kabanda {name: "Kabanda"}),
+    (hanuman {name: "Hanuman"}),
 
     
 // Items
     (indrasWeapons:Item {name: "Indra's weapons"}),
-    (bow:Item {name: "Indra's bow"})-[:PART_OF]->(indrasWeapons),
-    (sword:Item {name: "Indra's sword"})-[:PART_OF]->(indrasWeapons),
-    (arrow:Item {name: "Indra's arrow quivers", quantity: 2})-[:PART_OF]->(indrasWeapons),
+    (bow:Item {name: "Indra's bow"}),
+    (sword:Item {name: "Indra's sword"}),
+    (arrow:Item {name: "Indra's arrow quivers", quantity: 2}),
+    (bow)-[:PART_OF]->(indrasWeapons),
+    (sword)-[:PART_OF]->(indrasWeapons),
+    (arrow)-[:PART_OF]->(indrasWeapons),
 
 // Locations and status
     (throne:Status {name: "Sovereignity"}),
@@ -76,7 +88,8 @@ create
     (exile)-[:STOPPED_AT {reason: "dismissed charioteers and seen his father for the last time"}]->(srngavera),
     (bhardavaja)<-[:TOLD_BY {subject: "Rama"}]-(citakutra),
     (rama)-[:VISIT]->(agastya),
-    (agastya)-[:OFFER]->(indrasWeapons)<-[:TAKES]-(rama),
+    (agastya)-[:OFFER]->(indrasWeapons)
+    (indrasWeapons)<-[:TAKES]-(rama),
     (surpanaka)-[:INSTRUCTS]->(surpanakaVassals),
     (surpanakaVassals)-[:ARRIVE]->(jansthana),
     (ravana)-[:INSTRUCTS]->(marica),
@@ -110,18 +123,20 @@ create
     (bharata)<-[:REJECTED_BY]-(throne),
     (bharata)-[:VISIT {subject: "Rama"}]->(citakutra),
     (rama)-[:URGES]->(bharata),
-    (rama)-[:GIVES]->(:Item {name: "Sandals"}),
+    (sandals:Item {name: "sandals"}),
+    (rama)-[:GIVES]->(sandals),
     (bharata)<-[:ASCENDED_BY]-(throne),
 
 
 // Characteristics
     (rama)-[:COMPARED_TO {trait: "valor"}]->(vishnu),
-    (rama)-[:COMPARED_TO {trait: ["generocity", "truthseeking"]}]->(kubera),
+    (rama)-[:COMPARED_TO {trait: "truthseeking"}]->(kubera),
     (rama)-[:BANISHED_TO]->(exile),
 
 // Undefined, perhaps unimportant? 
 // Kept due to presence in text, but probably need to attach to all male heirs of the house
-    (rama)-[:MEMBER_OF]->(iksvaku:Clan {name: "Ikshvaku"}),
+    (iksvaku:Clan {name: "Iskhvaku"}),
+    (rama)-[:MEMBER_OF]->(iksvaku),
 // Allusion
     (moon:HeavenlyBody {name: "Moon", type: "planet"}),
     (rohini:HeavenlyBody {name: "Rohini", type: "constellation"}),

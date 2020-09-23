@@ -1,0 +1,1 @@
+surge . --domain whitenoise.surge.sh

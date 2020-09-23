@@ -1,4 +1,5 @@
 // title: Don DeLillo: White Noise (1985)
+// project: whitenoise
 create
 // NODES
 // I - WAVES AND RADIATION 
