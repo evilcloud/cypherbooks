@@ -22,7 +22,7 @@ there is also the HTML version of the same database (incomplete) generated with 
 
 ![](media/pyvi_white_noise.png)
 
-The simplified, but interactive graph of this book can be found [here]()
+The simplified, but interactive graph of this book can be found [here](http://whitenoise.kissr.com/#)
 
 ## रामायणम्
 
