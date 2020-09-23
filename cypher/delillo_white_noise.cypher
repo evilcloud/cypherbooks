@@ -84,7 +84,7 @@ create
     (sailing:Subject {name: "Ocean sailing"}),
     (meteorology:Subject {name: "Meteorology"}),
     (bob:Person {name: "Bob Pardee"}),
-    (treadwellSister:Person {name: "Mr. Treadwell's sister"}),
+    (treadwellSister:Person {name: "Gladys Treadwell", fullName: "Mr. Treadwell's sister"}),
     (treadwellHouse:Location {name: "Mr. Treadwell's house", type: "dwelling"}),
     // {chapter: 13}
     (mall:Location:Institution {name: "Mid-Village Mall"}),
@@ -98,7 +98,7 @@ create
     (grappa:Person {name: "Nicholas Grappa"}),
     (lasher:Person {name: "Elliot Lasher"}),
     // {chapter: 15}
-    (gladys:Person {name: "Gladys"}),
+    (gladys:Person {name: "Gladys Presley"}),
     // {chapter: 16}
     (compCenter:Institution {name: "computer center"}),
     (eric:Person {name: "Eric Massingale"}),
@@ -108,7 +108,14 @@ create
     (indonesia:Location {name: "Indonesia", type: "country"}),
     (quadaffi:Person {name: "Colonel Quadaffi", fullName: "Gadaffi"}),
     // {chapter: 19}
+    (chinese:Language {name: "Chinese"}),
+// II: The Airborne Toxic Event
+// {part: 2}
+    // {chapter: 21}
 
+
+
+    
 // EDGES
 // I - WAVES AND RADIATION
 // {part:1}
@@ -234,6 +241,9 @@ create
     (malcom)-[:MEMBER_OF {capacity: "employment"}]->(cia),
     (tweedy)-[:KNOWS]->(quadaffi),
     // {chapter: 19}
-
-
+    (bee)-[:KNOWS]->(chinese),
+    // {chapter: 20}
+// II: The Airborne Toxic Event
+// {part: 2}
+    // {chapter: 21}
     ()
