@@ -1,3 +1,4 @@
+// title: Don DeLillo: White Noise (1985)
 create
 // NODES
 // I - WAVES AND RADIATION 
@@ -28,8 +29,6 @@ create
     (stationwagon:Item {name: "station wagon", type: "car", color: "metalic grey", part: 1, chapter: 2}),
     (wilder:Person {name: "Wilder", child: true, part: 1, chapter: 2}),
     (home:Location {name: "Home", type: "dwelling", part: 1, chapter: 2}),
-    (kitchen:Location {name: "kitchen", part: 1, chapter: 2}),
-    (bedroom:Location {name: "bedroom", part: 1, chapter: 2}),
     (denise:Person {name: "Denise", child: true, age: 11, part: 1, chapter: 2}),
     (steffie:Person {name: "Steffie", child: true, part: 1, chapter: 2}),
     (heinrich:Person {name: "Heinrich", child: true, age: 14, part: 1, chapter: 2}),
