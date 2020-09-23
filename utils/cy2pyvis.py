@@ -58,8 +58,9 @@ def get_edge(line: str) -> str:
 
 
 def get_nodes_occurences(edges: list) -> dict:
-    nodes_in_edges = list(itertools.chain.from_iterable(edges))
-    return collections.Counter(nodes_in_edges)
+    edges_pairs = [pair[0] for pair in edges]
+    pairs = list(itertools.chain.from_iterable(edges_pairs))
+    return collections.Counter(pairs)
 
 
 def get_nodes_and_edges(lines: list):
@@ -69,9 +70,15 @@ def get_nodes_and_edges(lines: list):
         if is_node(line):
             nodes[get_var_from_node(line)] = get_first_prop(line)
         if is_edge(line):
-            # print(get_var_from_edge(line))
-            edges.append(get_var_from_edge(line))
+            edges.append((get_var_from_edge(line), get_edge(line)))
     return nodes, edges
+
+
+def get_title(line: str) -> str:
+    title_marker = "// title:"
+    if line.startswith(title_marker):
+        return line[len(title_marker) :]
+    return None
 
 
 def clean_str(string: str):
@@ -95,7 +102,7 @@ def main():
     lines = get_lines(filename)
     print(f"loaded {len(lines)} lines")
 
-    net = Network("95%", "100%")
+    net = Network("95%", "100%", heading=get_title(lines[0]))
     net.show_buttons()
 
     nodes, edges = get_nodes_and_edges(lines)
@@ -104,8 +111,9 @@ def main():
 
     for node in nodes:
         net.add_node(node, label=nodes[node], size=(sqrt(node_weight[node]) * 5))
-    for var1, var2 in edges:
-        net.add_edge(var1, var2)
+    for vars, title in edges:
+        var1, var2 = vars
+        net.add_edge(var1, var2, title=title)
 
     net.show(save_file)
     print(f"saved into {save_file}")
