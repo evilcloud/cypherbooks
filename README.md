@@ -22,7 +22,7 @@ there is also the HTML version of the same database (incomplete) generated with 
 
 ![](media/pyvi_white_noise.png)
 
-The simplified, but interactive graph of this book can be found [here](http://whitenoise.kissr.com/#)
+The simplified, but interactive graph of this book can be found [here](http://whitenoise.surge.sh)
 
 ## रामायणम्
 
@@ -31,6 +31,10 @@ The Ramayana is one of the three (if we consider Bhagavat Gita as an independent
 
 Currently the development has paused, as I am reviewing the entry criteria
 ![](media/ramanyana_graph.png)
+
+Again, the interactive, albeit simplified version is on [surge](https://ramanyana.surge.sh/)
+
+![](media/pyvi_ramanyana.png)
 
 ## Made in Japan: Studies in Popular Music (2014)
 

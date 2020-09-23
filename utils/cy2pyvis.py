@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import sys
 import os
 import logging
@@ -5,6 +7,7 @@ import re
 import itertools
 import collections
 from math import sqrt
+from subprocess import Popen
 from pyvis.network import Network
 
 
@@ -37,16 +40,24 @@ def get_var_from_node(line: str) -> str:
 
 
 def get_var_from_edge(line: str):
-    edge_vars = re.compile(r"\(\w*\)")
-    var1, var2 = re.findall(edge_vars, line)
-    return clean_str(var1), clean_str(var2)
+    try:
+        edge_vars = re.compile(r"\(\w*\)")
+        var1, var2 = re.findall(edge_vars, line)
+        return clean_str(var1), clean_str(var2)
+    except Exception as ex:
+        print(line)
+        print(ex)
+        input()
 
 
 def get_first_prop(line: str) -> str:
-    _, body = line.split("{")
-    props, _ = body.split("}")
-    p = props.split(",")[0]
-    return clean_str(p.split(":")[1])
+    try:
+        _, body = line.split("{")
+        props, _ = body.split("}")
+        p = props.split(",")[0]
+        return clean_str(p.split(":")[1])
+    except Exception:
+        return None
 
 
 def get_edge(line: str) -> str:
@@ -68,17 +79,31 @@ def get_nodes_and_edges(lines: list):
     edges = []
     for line in lines:
         if is_node(line):
-            nodes[get_var_from_node(line)] = get_first_prop(line)
+            var = get_var_from_node(line)
+            name = get_first_prop(line)
+            nodes[var] = name if name else var
         if is_edge(line):
             edges.append((get_var_from_edge(line), get_edge(line)))
     return nodes, edges
 
 
 def get_title(line: str) -> str:
-    title_marker = "// title:"
     if line.startswith(title_marker):
         return line[len(title_marker) :]
     return None
+
+
+def scan_lines(lines: list, marker: str) -> str:
+    for line in lines:
+        if line.startswith(marker):
+            return line[len(marker) + 1 :]
+    return ""
+
+
+def get_metadata(lines: list):
+    title = scan_lines(lines, "// title:")
+    project = scan_lines(lines, "// project:")
+    return title.strip(), project.strip()
 
 
 def clean_str(string: str):
@@ -97,12 +122,13 @@ def main():
         filename = args[1]
     else:
         filename = "../cypher/delillo_white_noise.cypher"
-    save_file = "index.html"
 
     lines = get_lines(filename)
     print(f"loaded {len(lines)} lines")
 
-    net = Network("95%", "100%", heading=get_title(lines[0]))
+    header, project = get_metadata(lines)
+
+    net = Network("95%", "100%", heading=header)
     net.show_buttons()
 
     nodes, edges = get_nodes_and_edges(lines)
@@ -113,10 +139,30 @@ def main():
         net.add_node(node, label=nodes[node], size=(sqrt(node_weight[node]) * 5))
     for vars, title in edges:
         var1, var2 = vars
+        net.add_nodes([var1, var2])
         net.add_edge(var1, var2, title=title)
 
-    net.show(save_file)
-    print(f"saved into {save_file}")
+    load_dir = os.path.split(filename)[0]
+    save_file = "index.html"
+    if project:
+        save_dir = project
+    else:
+        base = os.path.basename(filename)
+        pure = os.path.splitext(base)[0]
+        save_file = pure + ".html"
+        save_dir = "no_project_metadata"
+
+    save_dir = os.path.join(load_dir, save_dir)
+    if not os.path.exists(save_dir):
+        os.mkdir(save_dir)
+
+    net.show(os.path.join(save_dir, save_file))
+    print(f"saved into {save_file} in {save_dir}")
+    bash_line = f"surge . --domain {project}.surge.sh"
+    bash_file = os.path.join(save_dir, "s.sh")
+    with open(bash_file, "w") as f:
+        f.write(bash_line)
+    os.chmod(bash_file, 509)
 
 
 if __name__ == "__main__":
