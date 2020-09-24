@@ -48,7 +48,7 @@ Currently only simple patterns are supported, that is `(node {full_syntaxis_poss
 
 The "ongoing development" stage is definitely on, as I am trying to rewrite the whole thing is some niche language like [Nim](https://nim-lang.org/) or [V](https://vlang.io/)
 
-## DRAW_PYVI
+## CY2PYVIS
 
 for those, who don't want to fire up Neo4j every time they want to see the general outline of relationships between elements -- parses cypher straight into html (pyvi with JS, I assume).
 
