@@ -8,12 +8,12 @@ create
     (hill:Institution {name: "College-on-the-Hill", type: "education", part: 1, chapter: 1}),
     (protagonist:Person {name: "Jack Gladney", age: 51, part: 1, chapter: 1}),
     (hitlerStudies:Subject {name: "Hitler Studies", type: "Academic discipline", since: 1968, part: 1, chapter: 1}),
-    (hitlerDept:Institution {name: "department of Hitler Studies", type: "education", part: 1, chapter: 1}),
-    (chancellor:Person {name: "chancellor of College-on-Hill", position: "leader", part: 1, chapter: 1}),
-    (hitler:Person {name: "Adolf Hitler", position: "leader", part: 1, chapter: 1}),
-    (nixon:Person {name: "Richard Nixon", position: "leader", part: 1, chapter: 1}),
-    (ford:Person {name: "Gerard Ford", position: "leader", part: 1, chapter: 1}),
-    (carter:Person {name: "Jimmy Carter", position: "leader", part: 1, chapter: 1}),
+    (hitlerDept:Institution {name: "Hitler Studies dept", type: "education", part: 1, chapter: 1}),
+    (chancellor:Person {name: "chancellor of College-on-Hill", part: 1, chapter: 1}),
+    (hitler:Person {name: "Adolf Hitler", leadership: true, part: 1, chapter: 1}),
+    (nixon:Person {name: "Richard Nixon", leadership: true, part: 1, chapter: 1}),
+    (ford:Person {name: "Gerard Ford", leadership: true, part: 1, chapter: 1}),
+    (carter:Person {name: "Jimmy Carter", leadership: true, part: 1, chapter: 1}),
     (austria:Location {name: "Austria", type: "country", part: 1, chapter: 1}),
     // {chapter: 2}
     (babette:Person {name: "Babette", part: 1, chapter: 2}),
@@ -26,8 +26,8 @@ create
     (globe:Media {name: "Globe", type: "newspaper", part: 1, chapter: 2}),
     (world:Media {name: "World", type: "newspaper", part: 1, chapter: 2}),
     (star:Media {name: "Star", type: "newspaper", part: 1, chapter: 2}),
-    (adEd:Institution {name: "adult education course", type: "education", part: 1, chapter: 2}),
-    (stationwagon:Item {name: "station wagon", type: "car", color: "metalic grey", part: 1, chapter: 2}),
+    (adEd:Institution {name: "adultEd", fullName: "adult education course", type: "education", part: 1, chapter: 2}),
+    // (stationwagon:Item {name: "station wagon", type: "car", color: "metalic grey", part: 1, chapter: 2}),
     (wilder:Person {name: "Wilder", child: true, part: 1, chapter: 2}),
     (home:Location {name: "Home", type: "dwelling", part: 1, chapter: 2}),
     (denise:Person {name: "Denise", child: true, age: 11, part: 1, chapter: 2}),
@@ -35,14 +35,14 @@ create
     (heinrich:Person {name: "Heinrich", child: true, age: 14, part: 1, chapter: 2}),
     // {chapter: 3}
     (centuryHall:Location {name: "Century Hall", type: "building", part: 1, chapter: 3}),
-    (cultDept:Institution {name: "culture deartment", fullName: "American environmets", type: "education", part: 1, chapter: 3}),
+    (cultDept:Institution {name: "culture dept", fullName: "American environmets", type: "education", part: 1, chapter: 3}),
     (alfonse:Person {name: "Alfonse", fullName: "Alfonse (Fast Food) Stompanato", part: 1, chapter: 3}),
     (murray:Person {name: "Murray", fullName: "Murray Jay Siskind", part: 1, chapter: 3}),
     (roomingHouse:Location {name: "rooming house", type: "dwelling", part: 1, chapter: 3}),
-    (womanWithSecret:Person {name: "a woman who harbors a terrible secret", part: 1, chapter: 3}),
-    (hautedMan:Person {name: "a man with a hauted look", part: 1, chapter: 3}),
+    (womanWithSecret:Person {name: "terrible secret lady", fullName: "a woman who harbors a terrible secret", part: 1, chapter: 3}),
+    (hautedMan:Person {name: "haunted man", fullName: "a man with a hauted look", part: 1, chapter: 3}),
     (dunlop:Person {name: "Howard Dunlop", nickName: "a man who never comes out of his room", part: 1, chapter: 3}),
-    (letterboxWoman:Person {name: "a woman who stnds by the letterbox for hours", part: 1, chapter: 3}),
+    (letterboxWoman:Person {name: "letterbox woman", fullName: "a woman who stands by the letterbox for hours", part: 1, chapter: 3}),
     (noPastMan:Person {name: "a man with no past", part: 1, chapter: 3}),
     (blacksmith:Location {name: "Blacksmith", type: "settlement", part: 1, chapter: 3}),
     (asylum:Institution:Location {name: "Insane asylum", part: 1, chapter: 3}),
@@ -115,7 +115,7 @@ create
 
 
 
-    
+
 // EDGES
 // I - WAVES AND RADIATION
 // {part:1}
@@ -144,8 +144,8 @@ create
     (treadwell)-[:LIKES]->(globe),
     (treadwell)-[:LIKES]->(world),
     (treadwell)-[:LIKES]->(star),
-    (protagonist)-[:OWNS]->(stationwagon),
-    (babette)-[:OWNS]->(stationwagon),
+    // (protagonist)-[:OWNS]->(stationwagon),
+    // (babette)-[:OWNS]->(stationwagon),
     (babette)-[:PARENT_OF {capacity: "mother"}]->(wilder),
     (wilder)-[:LIVES_IN]->(home),
     (babette)-[:LIVES_IN]->(home),
