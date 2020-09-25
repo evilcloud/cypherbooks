@@ -10,6 +10,7 @@ from math import sqrt
 from subprocess import Popen
 from pyvis.network import Network
 from pyvis.node import Node
+from pyvis.physics import Physics
 
 
 def get_lines(filename: str) -> list:
@@ -171,10 +172,10 @@ def main():
         net.add_nodes([var1, var2])
         net.add_edge(var1, var2, title=title)
 
-    net.add_node("LEGEND", shape="circle")
+    net.add_node("LEGEND", shape="circle", physics=False)
     for label in label_set:
         net.add_node(label, group=label)
-        net.add_edge("LEGEND", label)
+        net.add_edge("LEGEND", label, hidden=True)
 
     load_dir = os.path.split(filename)[0]
     save_file = "index.html"
@@ -192,7 +193,7 @@ def main():
 
     net.show(os.path.join(save_dir, save_file))
     print(f"saved into {save_file} in {save_dir}")
-    bash_line = f"surge . --domain {project}.surge.sh"
+    bash_line = f"surge . --domain {project}.surge.sh\nrm index.html"
     bash_file = os.path.join(save_dir, "s.sh")
     with open(bash_file, "w") as f:
         f.write(bash_line)
