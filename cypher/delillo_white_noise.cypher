@@ -63,7 +63,7 @@ create
     // {chapter: 7}
     (church:Location:Institution {name: "Congregational church"}),
     // {chapter: 8}
-    (german:Language:Subject {name: "German"}),
+    (german:Subject:Language {name: "German"}),
     // {chapter: 9}
     (chun:Person {name: "Chun Duc", child: true}),
     // {chapter: 10}
@@ -79,8 +79,8 @@ create
     (babetteEx:Person {name: "Babette's ex"}),
     (australia:Location {name: "Australia", type: "country"}),
     // {chapter: 12}
-    (greek:Language:Subject {name: "Greek"}),
-    (latin:Language:Subject {name: "Latin"}),
+    (greek:Subject:Language: {name: "Greek"}),
+    (latin:Subject:Language: {name: "Latin"}),
     (sailing:Subject {name: "Ocean sailing"}),
     (meteorology:Subject {name: "Meteorology"}),
     (bob:Person {name: "Bob Pardee"}),

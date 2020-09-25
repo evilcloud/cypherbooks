@@ -9,6 +9,7 @@ import collections
 from math import sqrt
 from subprocess import Popen
 from pyvis.network import Network
+from pyvis.node import Node
 
 
 def get_lines(filename: str) -> list:
@@ -31,12 +32,21 @@ def is_node(line: str) -> bool:
 
 
 def is_edge(line: str) -> bool:
-    return "[" in line
+    return "[:" in line
 
 
 def get_var_from_node(line: str) -> str:
     body = line.split("(")[1]
     return clean_str(body.split(":")[0])
+
+
+def get_label_from_node(line: str) -> list:
+    body = line.split("(")[1]
+    if " " in body:
+        labels = body.split(" ")[0]
+    else:
+        labels = body.split(")")[0]
+    return labels.split(":")[1:]
 
 
 def get_var_from_edge(line: str):
@@ -77,14 +87,16 @@ def get_nodes_occurences(edges: list) -> dict:
 def get_nodes_and_edges(lines: list):
     nodes = {}
     edges = []
+    labels = {}
     for line in lines:
         if is_node(line):
             var = get_var_from_node(line)
             name = get_first_prop(line)
             nodes[var] = name if name else var
+            labels[var] = get_label_from_node(line)
         if is_edge(line):
             edges.append((get_var_from_edge(line), get_edge(line)))
-    return nodes, edges
+    return nodes, edges, labels
 
 
 def get_title(line: str) -> str:
@@ -131,16 +143,38 @@ def main():
     net = Network("95%", "100%", heading=header)
     net.show_buttons()
 
-    nodes, edges = get_nodes_and_edges(lines)
+    nodes, edges, labels = get_nodes_and_edges(lines)
     node_weight = get_nodes_occurences(edges)
-    print(f"collected {len(nodes)} nodes, {len(edges)} edges")
+    print(f"collected {len(nodes)} nodes, {len(edges)} edges, {len(labels)} labels")
 
+    # shapes = {
+    #     "Person": "triangle",
+    #     "Institution": "star",
+    #     "Everything else": "dot",
+    # }
+    # net.add_node("LEGEND", shape="circle")
+    # for shape_key in shapes:
+    #     net.add_node(shape_key, shape=shapes[shape_key])
+    #     net.add_edge("LEGEND", shape_key)
+
+    label_set = set()
     for node in nodes:
-        net.add_node(node, label=nodes[node], size=(sqrt(node_weight[node]) * 5))
+        first_label = labels[node][0]
+        label_set.add(first_label)
+        # shape = shapes.get(first_label, "dot")
+        group = first_label if first_label else ""
+        net.add_node(
+            node, label=nodes[node], group=group, size=(sqrt(node_weight[node]) * 5),
+        )
     for vars, title in edges:
         var1, var2 = vars
         net.add_nodes([var1, var2])
         net.add_edge(var1, var2, title=title)
+
+    net.add_node("LEGEND", shape="circle")
+    for label in label_set:
+        net.add_node(label, group=label)
+        net.add_edge("LEGEND", label)
 
     load_dir = os.path.split(filename)[0]
     save_file = "index.html"
