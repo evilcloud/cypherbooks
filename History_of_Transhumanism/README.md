@@ -5,6 +5,7 @@
 **The link to the graph can be found [here](https://history_of_transhumanism.surge.sh/)**
 
 **The actual paper is [here](gjv080.pdf)**
+
 doi: 10.1093/notesj/gjv080
 
 The paper deals with the origins of the term ’Transhumanism’.
