@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+from os import chdir
 import sys
 import os
 import logging
@@ -100,10 +101,10 @@ def get_nodes_and_edges(lines: list):
     return nodes, edges, labels
 
 
-def get_title(line: str) -> str:
-    if line.startswith(title_marker):
-        return line[len(title_marker) :]
-    return None
+# def get_title(line: str) -> str:
+#     if line.startswith(title_marker):
+#         return line[len(title_marker) :]
+#     return None
 
 
 def scan_lines(lines: list, marker: str) -> str:
@@ -172,10 +173,10 @@ def main():
         net.add_nodes([var1, var2])
         net.add_edge(var1, var2, title=title)
 
-    net.add_node("LEGEND", shape="circle", physics=False)
-    for label in label_set:
-        net.add_node(label, group=label)
-        net.add_edge("LEGEND", label, hidden=True)
+    # net.add_node("LEGEND", shape="circle", physics=False)
+    # for label in label_set:
+    #     net.add_node(label, group=label)
+    #     net.add_edge("LEGEND", label, hidden=True)
 
     load_dir = os.path.split(filename)[0]
     save_file = "index.html"
@@ -191,13 +192,31 @@ def main():
     if not os.path.exists(save_dir):
         os.mkdir(save_dir)
 
+    net.barnes_hut(
+        gravity=-4000,
+        central_gravity=0.3,
+        spring_strength=0.001,
+        damping=0.09,
+        overlap=1,
+    )
     net.show(os.path.join(save_dir, save_file))
     print(f"saved into {save_file} in {save_dir}")
-    bash_line = f"surge . --domain {project}.surge.sh\nrm index.html"
-    bash_file = os.path.join(save_dir, "s.sh")
-    with open(bash_file, "w") as f:
-        f.write(bash_line)
-    os.chmod(bash_file, 509)
+
+    if project:
+        bash_line = (
+            f"surge . --domain {project}.surge.sh\nrm index.html"  # \nrm index.html"
+        )
+        bash_file = os.path.join(save_dir, "s.sh")
+        with open(bash_file, "w") as f:
+            f.write(bash_line)
+        os.chmod(bash_file, 509)
+        print(f"bash file created")
+
+        curr_dir = os.getcwd()
+        chdir(save_dir)
+        os.popen("s.sh")
+        chdir(curr_dir)
+        print("done")
 
 
 if __name__ == "__main__":

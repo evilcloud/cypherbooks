@@ -1,2 +1,1 @@
-surge . --domain whitenoise.surge.sh
-rm index.html
+/surge . --domain whitenoise.surge.sh

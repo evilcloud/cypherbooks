@@ -1,1 +1,0 @@
-surge . --domain .surge.sh

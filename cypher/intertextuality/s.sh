@@ -1,2 +1,1 @@
-surge . --domain intertextuality.surge.sh
-rm index.html
+/surge . --domain intertextuality.surge.sh
