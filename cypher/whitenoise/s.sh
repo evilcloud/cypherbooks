@@ -1,1 +1,1 @@
-/surge . --domain whitenoise.surge.sh
+surge . --domain whitenoise.surge.sh

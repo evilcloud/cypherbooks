@@ -1,0 +1,128 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1>Don DeLillo: White Noise (1985)</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 95%;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"group": "Institution", "id": "hill", "label": "College-on-the-Hill", "shape": "dot", "size": 11.180339887498949}, {"group": "Person", "id": "protagonist", "label": "Jack Gladney", "shape": "dot", "size": 18.708286933869708}, {"group": "Subject", "id": "hitlerStudies", "label": "Hitler Studies", "shape": "dot", "size": 8.660254037844386}, {"group": "Institution", "id": "hitlerDept", "label": "Hitler Studies dept", "shape": "dot", "size": 10.0}, {"group": "Person", "id": "chancellor", "label": "chancellor of College-on-Hill", "shape": "dot", "size": 12.24744871391589}, {"group": "Person", "id": "hitler", "label": "Adolf Hitler", "shape": "dot", "size": 5.0}, {"group": "Person", "id": "nixon", "label": "Richard Nixon", "shape": "dot", "size": 5.0}, {"group": "Person", "id": "ford", "label": "Gerard Ford", "shape": "dot", "size": 5.0}, {"group": "Person", "id": "carter", "label": "Jimmy Carter", "shape": "dot", "size": 5.0}, {"group": "Location", "id": "austria", "label": "Austria", "shape": "dot", "size": 5.0}, {"group": "Person", "id": "babette", "label": "Babette", "shape": "dot", "size": 18.027756377319946}, {"group": "Institution", "id": "volunteers", "label": "volunteering group", "shape": "dot", "size": 7.0710678118654755}, {"group": "Institution", "id": "blind", "label": "blind people", "shape": "dot", "size": 7.0710678118654755}, {"group": "Person", "id": "treadwell", "label": "Treadwell", "shape": "dot", "size": 16.583123951776997}, {"group": "Media", "id": "natEnquirer", "label": "National Enquirer", "shape": "dot", "size": 5.0}, {"group": "Media", "id": "natExaminer", "label": "National Examiner", "shape": "dot", "size": 5.0}, {"group": "Media", "id": "natExpress", "label": "National Express", "shape": "dot", "size": 5.0}, {"group": "Media", "id": "globe", "label": "Globe", "shape": "dot", "size": 5.0}, {"group": "Media", "id": "world", "label": "World", "shape": "dot", "size": 5.0}, {"group": "Media", "id": "star", "label": "Star", "shape": "dot", "size": 5.0}, {"group": "Institution", "id": "adEd", "label": "adultEd", "shape": "dot", "size": 5.0}, {"group": "Item", "id": "stationwagon", "label": "station wagon", "shape": "dot", "size": 7.0710678118654755}, {"group": "Person", "id": "wilder", "label": "Wilder", "shape": "dot", "size": 8.660254037844386}, {"group": "Location", "id": "home", "label": "Home", "shape": "dot", "size": 13.228756555322953}, {"group": "Person", "id": "denise", "label": "Denise", "shape": "dot", "size": 8.660254037844386}, {"group": "Person", "id": "steffie", "label": "Steffie", "shape": "dot", "size": 7.0710678118654755}, {"group": "Person", "id": "heinrich", "label": "Heinrich", "shape": "dot", "size": 10.0}, {"group": "Location", "id": "centuryHall", "label": "Century Hall", "shape": "dot", "size": 7.0710678118654755}, {"group": "Institution", "id": "cultDept", "label": "culture dept", "shape": "dot", "size": 12.24744871391589}, {"group": "Person", "id": "alfonse", "label": "Alfonse", "shape": "dot", "size": 5.0}, {"group": "Person", "id": "murray", "label": "Murray", "shape": "dot", "size": 11.180339887498949}, {"group": "Location", "id": "roomingHouse", "label": "rooming house", "shape": "dot", "size": 13.228756555322953}, {"group": "Person", "id": "womanWithSecret", "label": "terrible secret lady", "shape": "dot", "size": 5.0}, {"group": "Person", "id": "hautedMan", "label": "haunted man", "shape": "dot", "size": 5.0}, {"group": "Person", "id": "dunlop", "label": "Howard Dunlop", "shape": "dot", "size": 13.228756555322953}, {"group": "Person", "id": "letterboxWoman", "label": "letterbox woman", "shape": "dot", "size": 5.0}, {"group": "Person", "id": "noPastMan", "label": "a man with no past", "shape": "dot", "size": 5.0}, {"group": "Location", "id": "blacksmith", "label": "Blacksmith", "shape": "dot", "size": 10.0}, {"group": "Institution", "id": "asylum", "label": "Insane asylum", "shape": "dot", "size": 5.0}, {"group": "Institution", "id": "barn", "label": "tourist barn", "shape": "dot", "size": 8.660254037844386}, {"group": "Location", "id": "farmington", "label": "Farmington", "shape": "dot", "size": 5.0}, {"group": "Person", "id": "bee", "label": "Bee", "shape": "dot", "size": 12.24744871391589}, {"group": "Person", "id": "tweedy", "label": "Tweedy Browner", "shape": "dot", "size": 8.660254037844386}, {"group": "Location", "id": "korea", "label": "South Korea", "shape": "dot", "size": 5.0}, {"group": "Item", "id": "eroticFic", "label": "erotic fiction", "shape": "dot", "size": 5.0}, {"group": "Person", "id": "devi", "label": "Mother Devi", "shape": "dot", "size": 7.0710678118654755}, {"group": "Location", "id": "ashram", "label": "ashram", "shape": "dot", "size": 7.0710678118654755}, {"group": "Location", "id": "tubb", "label": "Tubb MT", "shape": "dot", "size": 5.0}, {"group": "Location", "id": "artsDuplex", "label": "Arts Duplex", "shape": "dot", "size": 0.0}, {"group": "Subject", "id": "advNazism", "label": "Advanced Nazism", "shape": "dot", "size": 7.0710678118654755}, {"group": "Location", "id": "church", "label": "Congregational church", "shape": "dot", "size": 5.0}, {"group": "Subject", "id": "german", "label": "German", "shape": "dot", "size": 7.0710678118654755}, {"group": "Person", "id": "chun", "label": "Chun Duc", "shape": "dot", "size": 0.0}, {"group": "Person", "id": "tommyRoy", "label": "Tommy Roy Foster", "shape": "dot", "size": 7.0710678118654755}, {"group": "Institution", "id": "prison", "label": "prison", "shape": "dot", "size": 7.0710678118654755}, {"group": "Location", "id": "ironCity", "label": "Iron City", "shape": "dot", "size": 5.0}, {"group": "Institution", "id": "cia", "label": "CIA", "shape": "dot", "size": 7.0710678118654755}, {"group": "Person", "id": "dana", "label": "Dana Breedlove", "shape": "dot", "size": 8.660254037844386}, {"group": "Language", "id": "spanish", "label": "Spanish", "shape": "dot", "size": 5.0}, {"group": "Language", "id": "portugese", "label": "Portugese", "shape": "dot", "size": 5.0}, {"group": "Person", "id": "eugene", "label": "Eugene", "shape": "dot", "size": 8.660254037844386}, {"group": "Person", "id": "babetteEx", "label": "Babettes ex", "shape": "dot", "size": 8.660254037844386}, {"group": "Location", "id": "australia", "label": "Australia", "shape": "dot", "size": 7.0710678118654755}, {"group": "Subject", "id": "greek", "label": "Greek", "shape": "dot", "size": 5.0}, {"group": "Subject", "id": "latin", "label": "Latin", "shape": "dot", "size": 5.0}, {"group": "Subject", "id": "sailing", "label": "Ocean sailing", "shape": "dot", "size": 5.0}, {"group": "Subject", "id": "meteorology", "label": "Meteorology", "shape": "dot", "size": 5.0}, {"group": "Person", "id": "bob", "label": "Bob Pardee", "shape": "dot", "size": 5.0}, {"group": "Person", "id": "treadwellSister", "label": "Gladys Treadwell", "shape": "dot", "size": 8.660254037844386}, {"group": "Location", "id": "treadwellHouse", "label": "Mr. Treadwells house", "shape": "dot", "size": 7.0710678118654755}, {"group": "Location", "id": "mall", "label": "Mid-Village Mall", "shape": "dot", "size": 7.0710678118654755}, {"group": "Person", "id": "hollis", "label": "Hollis Write", "shape": "dot", "size": 5.0}, {"group": "Institution", "id": "police", "label": "police", "shape": "dot", "size": 7.0710678118654755}, {"group": "Person", "id": "adele", "label": "Adele T", "shape": "dot", "size": 5.0}, {"group": "Product", "id": "dylar", "label": "Dylar", "shape": "dot", "size": 5.0}, {"group": "Person", "id": "dimitros", "label": "Dimitros Costakis", "shape": "dot", "size": 7.0710678118654755}, {"group": "Person", "id": "elvis", "label": "Elvis Presley", "shape": "dot", "size": 8.660254037844386}, {"group": "Person", "id": "grappa", "label": "Nicholas Grappa", "shape": "dot", "size": 5.0}, {"group": "Person", "id": "lasher", "label": "Elliot Lasher", "shape": "dot", "size": 5.0}, {"group": "Person", "id": "gladys", "label": "Gladys Presley", "shape": "dot", "size": 5.0}, {"group": "Institution", "id": "compCenter", "label": "computer center", "shape": "dot", "size": 7.0710678118654755}, {"group": "Person", "id": "eric", "label": "Eric Massingale", "shape": "dot", "size": 5.0}, {"group": "Person", "id": "malcom", "label": "Malcom Hunt", "shape": "dot", "size": 8.660254037844386}, {"group": "Location", "id": "indonesia", "label": "Indonesia", "shape": "dot", "size": 7.0710678118654755}, {"group": "Person", "id": "quadaffi", "label": "Colonel Quadaffi", "shape": "dot", "size": 5.0}, {"group": "Language", "id": "chinese", "label": "Chinese", "shape": "dot", "size": 5.0}]);
+        edges = new vis.DataSet([{"from": "hill", "title": "employed by", "to": "protagonist"}, {"from": "hill", "title": "member of", "to": "hitlerDept"}, {"from": "hitlerStudies", "title": "subject of", "to": "hitlerDept"}, {"from": "protagonist", "title": "knows about", "to": "hitler"}, {"from": "hitlerStudies", "title": "created by", "to": "protagonist"}, {"from": "protagonist", "title": "member of", "to": "hitlerDept"}, {"from": "hill", "title": "member of", "to": "chancellor"}, {"from": "chancellor", "title": "assist", "to": "nixon"}, {"from": "chancellor", "title": "assist", "to": "ford"}, {"from": "chancellor", "title": "assist", "to": "carter"}, {"from": "chancellor", "title": "died in", "to": "austria"}, {"from": "protagonist", "title": "married to", "to": "babette"}, {"from": "volunteers", "title": "assist", "to": "blind"}, {"from": "babette", "title": "member of", "to": "volunteers"}, {"from": "babette", "title": "teaches", "to": "adEd"}, {"from": "babette", "title": "read", "to": "treadwell"}, {"from": "treadwell", "title": "member of", "to": "blind"}, {"from": "treadwell", "title": "likes", "to": "natEnquirer"}, {"from": "treadwell", "title": "likes", "to": "natExaminer"}, {"from": "treadwell", "title": "likes", "to": "natExpress"}, {"from": "treadwell", "title": "likes", "to": "globe"}, {"from": "treadwell", "title": "likes", "to": "world"}, {"from": "treadwell", "title": "likes", "to": "star"}, {"from": "protagonist", "title": "owns", "to": "stationwagon"}, {"from": "babette", "title": "owns", "to": "stationwagon"}, {"from": "babette", "title": "parent of", "to": "wilder"}, {"from": "wilder", "title": "lives in", "to": "home"}, {"from": "babette", "title": "lives in", "to": "home"}, {"from": "protagonist", "title": "lives in", "to": "home"}, {"from": "denise", "title": "parent of", "to": "babette"}, {"from": "denise", "title": "lives in", "to": "home"}, {"from": "steffie", "title": "lives in", "to": "home"}, {"from": "heinrich", "title": "parent of", "to": "protagonist"}, {"from": "heinrich", "title": "lives in", "to": "home"}, {"from": "cultDept", "title": "located in", "to": "centuryHall"}, {"from": "hitlerDept", "title": "located in", "to": "centuryHall"}, {"from": "alfonse", "title": "member of", "to": "cultDept"}, {"from": "murray", "title": "member of", "to": "cultDept"}, {"from": "murray", "title": "lives in", "to": "roomingHouse"}, {"from": "womanWithSecret", "title": "lives in", "to": "roomingHouse"}, {"from": "hautedMan", "title": "lives in", "to": "roomingHouse"}, {"from": "dunlop", "title": "lives in", "to": "roomingHouse"}, {"from": "letterboxWoman", "title": "lives in", "to": "roomingHouse"}, {"from": "noPastMan", "title": "lives in", "to": "roomingHouse"}, {"from": "home", "title": "located in", "to": "blacksmith"}, {"from": "hill", "title": "located in", "to": "blacksmith"}, {"from": "roomingHouse", "title": "located in", "to": "blacksmith"}, {"from": "asylum", "title": "located in", "to": "blacksmith"}, {"from": "barn", "title": "located in", "to": "farmington"}, {"from": "protagonist", "title": "travel to", "to": "barn"}, {"from": "murray", "title": "travel to", "to": "barn"}, {"from": "bee", "title": "parent of", "to": "protagonist"}, {"from": "bee", "title": "parent of", "to": "tweedy"}, {"from": "bee", "title": "knows", "to": "steffie"}, {"from": "bee", "title": "lives in", "to": "korea"}, {"from": "babette", "title": "read", "to": "eroticFic"}, {"from": "chancellor", "title": "assist", "to": "protagonist"}, {"from": "heinrich", "title": "parent of", "to": "devi"}, {"from": "devi", "title": "lives in", "to": "ashram"}, {"from": "ashram", "title": "located in", "to": "tubb"}, {"from": "advNazism", "title": "subject of", "to": "hitlerStudies"}, {"from": "protagonist", "title": "teaches", "to": "advNazism"}, {"from": "babette", "title": "teaches", "to": "church"}, {"from": "protagonist", "title": "not knows", "to": "german"}, {"from": "dunlop", "title": "knows", "to": "german"}, {"from": "dunlop", "title": "teaches", "to": "protagonist"}, {"from": "murray", "title": "affinity to", "to": "babette"}, {"from": "tommyRoy", "title": "located in", "to": "prison"}, {"from": "prison", "title": "located in", "to": "ironCity"}, {"from": "heinrich", "title": "knows", "to": "tommyRoy"}, {"from": "dana", "title": "member of", "to": "cia"}, {"from": "dana", "title": "knows", "to": "spanish"}, {"from": "dana", "title": "knows", "to": "portugese"}, {"from": "eugene", "title": "parent of", "to": "babetteEx"}, {"from": "eugene", "title": "parent of", "to": "babette"}, {"from": "babetteEx", "title": "parent of", "to": "wilder"}, {"from": "babetteEx", "title": "lives in", "to": "australia"}, {"from": "eugene", "title": "lives in", "to": "australia"}, {"from": "dunlop", "title": "knows", "to": "greek"}, {"from": "dunlop", "title": "knows", "to": "latin"}, {"from": "dunlop", "title": "knows", "to": "sailing"}, {"from": "dunlop", "title": "knows", "to": "meteorology"}, {"from": "bob", "title": "parent of", "to": "denise"}, {"from": "treadwellSister", "title": "sister of", "to": "treadwell"}, {"from": "treadwell", "title": "lives in", "to": "treadwellHouse"}, {"from": "treadwellSister", "title": "lives in", "to": "treadwellHouse"}, {"from": "treadwell", "title": "located in", "to": "mall"}, {"from": "treadwellSister", "title": "located in", "to": "mall"}, {"from": "hollis", "title": "member of", "to": "police"}, {"from": "adele", "title": "assist", "to": "police"}, {"from": "babette", "title": "takes", "to": "dylar"}, {"from": "dimitros", "title": "member of", "to": "cultDept"}, {"from": "dimitros", "title": "knows about", "to": "elvis"}, {"from": "murray", "title": "knows about", "to": "elvis"}, {"from": "grappa", "title": "member of", "to": "cultDept"}, {"from": "lasher", "title": "member of", "to": "cultDept"}, {"from": "gladys", "title": "mother of", "to": "elvis"}, {"from": "compCenter", "title": "member of", "to": "hill"}, {"from": "eric", "title": "member of", "to": "compCenter"}, {"from": "malcom", "title": "married to", "to": "tweedy"}, {"from": "bee", "title": "located in", "to": "indonesia"}, {"from": "malcom", "title": "located in", "to": "indonesia"}, {"from": "malcom", "title": "member of", "to": "cia"}, {"from": "tweedy", "title": "knows", "to": "quadaffi"}, {"from": "bee", "title": "knows", "to": "chinese"}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "barnesHut": {
+            "avoidOverlap": 1,
+            "centralGravity": 0.3,
+            "damping": 0.09,
+            "gravitationalConstant": -4000,
+            "springConstant": 0.001,
+            "springLength": 250
+        },
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>

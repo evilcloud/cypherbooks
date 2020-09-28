@@ -131,11 +131,12 @@ def clean_str(string: str):
 
 
 def main():
+    filename = ""
     args = sys.argv
     if len(args) > 1:
         filename = args[1]
-    else:
-        filename = "../cypher/delillo_white_noise.cypher"
+    # else:
+    #     filename = "../cypher/delillo_white_noise.cypher"
 
     lines = get_lines(filename)
     print(f"loaded {len(lines)} lines")
@@ -203,9 +204,7 @@ def main():
     print(f"saved into {save_file} in {save_dir}")
 
     if project:
-        bash_line = (
-            f"surge . --domain {project}.surge.sh\nrm index.html"  # \nrm index.html"
-        )
+        bash_line = f"surge . --domain {project}.surge.sh"  # \nrm index.html"
         bash_file = os.path.join(save_dir, "s.sh")
         with open(bash_file, "w") as f:
             f.write(bash_line)
