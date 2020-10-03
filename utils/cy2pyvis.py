@@ -12,6 +12,7 @@ from subprocess import Popen
 from pyvis.network import Network
 from pyvis.node import Node
 from pyvis.physics import Physics
+import shutil
 
 
 def get_lines(filename: str) -> list:
@@ -214,6 +215,9 @@ def main():
         curr_dir = os.getcwd()
         chdir(save_dir)
         os.popen("s.sh")
+        input("ENTER to remove reduntand directory")
+        chdir("..")
+        shutil.rmtree(save_dir)
         chdir(curr_dir)
         print("done")
 
