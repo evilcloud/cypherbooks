@@ -10,5 +10,5 @@ create
     (daedalus:Person {name: "Daedalus"}),
     (icarus:Person {name: "Icarus"}),
     (homunculus:Mean {name: "homunculus"}),
-    (alchemists:Person {name: "alchemists (personified)"}),
+    (alchemists:Person {name: "alchemists (personified)"})
     
