@@ -2,6 +2,10 @@
 
 Graph constructs (cypher / GQL / SPARQL / JSON) of books' nouns, events and relations node-by-node, edge-by-edge.
 
+## UPDATE:
+
+despite the prominent presence of the term `cypher` in the project name, I am experimenting with other formats, that may be better for storing and parsing graphs, and what's really important, easier for data entry. Currently I am experimenting with YAML. The format gets a lot of hate in the dev community, which I feel is often unjustified. The major advantage is the ease of parsing -- a lot of data is lost when parsing cypher with Python. Not here. Let's see how that goes.
+
 ## Utilities
 
 This repo also contains some small utilities, that help to automate data entry and handling. These can be found in the [utilities folder](https://github.com/evilcloud/cypherbooks/tree/master/utils)
