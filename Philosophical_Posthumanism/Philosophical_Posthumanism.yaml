@@ -1,0 +1,138 @@
+labels:
+  - Field:
+      - name: Posthumanism
+        rel:
+          arg: developed from
+          target: Postmodernism
+      - name: Humanism
+        rel:
+          arg: focus on
+          target: antropocentrism
+      - name: Antropocentrism
+        rel:
+          arg: rejected by
+          target: Posthumanism
+      - name: Dualism
+      - name: Critical Posthumanism
+        rel:
+          arg: part of
+          target: Posthumanism
+      - name: Cultural Posthumanism
+        rel:
+          - arg: part of
+            target: Posthumanism
+          - arg: developed from
+            target: A Manifesto for Cyborgs
+          - arg: developed from
+            target: Literary Criticism
+          - arg: part of
+            target: Cultural Studies
+          - arg: developed from
+            target: A Manifesto for Cyborgs
+      - name: Philosophical Posthumanism
+        rel:
+          arg: part of
+          target: Posthumanism
+      - name: Literary Criticism
+      - name: Literary Theory
+      - name: Cultural Studies
+      - name: Animal Studies
+        rel:
+          arg: developed from
+          target: A Manifesto for Cyborgs
+      - name: Transhumanism
+      - name: Antihumanism
+      - name: Metahumanism
+      - name: Posthumanities
+      - name: Metahumanities
+      - name: Object-oriented Ontologies
+      - name: Non-human Turn
+      - name: Feminism
+  - Person:
+      - name: Ihab Hassan
+      - name: Donna Haraway
+      - name: Katherine Hayles
+      - from: Italy
+        name: Alhieri Dante
+        yob: 1265
+        yod: 1321
+      - from:
+          - UK
+          - USA
+      - name: T.S. Eliot
+        yob: 1888
+        yod: 1965
+      - from: France
+        name: Pierre Teilhard de Chardin
+        yob: 1887
+        yod: 1955
+      - from: UK
+        name: Julian Huxley
+        yob: 1887
+        yod: 1963
+      - from: UK
+        name: Aldous Huxley
+        yob: 1894
+        yod: 1963
+  - Work:
+      - fullName: 'Prometheus as Performer: Toward a Posthumanist Culture?'
+        name: Prometheus as Performer
+        published: 1977
+        rel:
+          arg: created by
+          target: Ihab Hassan
+        type: article
+      - name: The Postmodern Turn
+        published: 1987
+        rel:
+          arg: created by
+          target: Ihab Hassan
+        type: article
+      - fullName: 'How We Became Virtual Posthuman: Virtual Bodies in Cybernetics, Literature and Informatics'
+        name: How We Became Virtual Posthuman
+        published: 1999
+        rel:
+          - arg: created by
+            target: Katherine Hayles
+          - arg: part of
+            target: Postmodernism
+          - arg: part of
+            target: Feminism
+        type: book
+      - lang: Italian
+        name: La Divina Comedia
+        published: 1321
+        rel:
+          arg: created by
+          target: Alhieri Dante
+        type: literature
+      - name: The Cocktail Party
+        published: 1950
+        rel:
+          arg: created by
+          target: T.S. Eliot
+        type: literature
+      - fullName: 'The Essence of the Democratic Idea: A Biological approach'
+        name: The Essence of the Democratic Idea
+        published: 1949
+        type: paper
+      - name: The Phenomenon of Man
+        published: 1955
+        type: book
+      - fullName: 'A Manifesto for Cyborgs: Science, Technology, and Social Feminism in 1980s'
+        name: A Manifesto for Cyborgs
+        published: 1985
+        rel:
+          arg: created by
+          target: Donna Haraway
+        type: article
+  - Epoch:
+      - name: Antropocene
+      - name: Possibility of posthumans now
+        rel:
+          - arg: rejected by
+            context: humans today are able to shift away from antropocentric onto-epistemological approach
+            target: Posthumanism
+          - arg: accepted by
+            context: attainable only by transcending beyond biological shell
+            target: Transhumanism
