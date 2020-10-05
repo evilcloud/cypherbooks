@@ -2,7 +2,7 @@
 
 **Link to the graph is [here](https://whitenoise.surge.sh/)**
 
-DeLillo's arguably most famous novel, and the one that has served as a breakthrough for him into the mainstream as an author. Today the work is considered as representative of postmodernism.
+DeLillo's arguably most famous novel, and the one that has served as a breakthrough for him into the mainstream as an author. Today the work is considered to be a canonical postmodernist writing.
 
 The story is presented from the first-person perspective of the protagonist, thus the world is centered around the main character, his actions, knowledge, and opinions. As the narrator the protagonist is relatively reliable, and he does not attempt to manipulate the narrative.
 
@@ -10,4 +10,4 @@ Geospacially the novel is almost claustrophobic, with very few locations between
 
 Personally: the protagonist would be hard to bear, if not for the absurdity of the premise.
 
-![](https://images-na.ssl-images-amazon.com/images/I/A1Tyk2V68HL.jpg)
+![](A1Tyk2V68HL.jpg)
