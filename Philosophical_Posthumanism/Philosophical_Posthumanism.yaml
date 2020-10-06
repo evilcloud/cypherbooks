@@ -1,138 +1,261 @@
 labels:
   - Field:
-      - name: Posthumanism
-        rel:
-          arg: developed from
-          target: Postmodernism
-      - name: Humanism
-        rel:
-          arg: focus on
-          target: antropocentrism
-      - name: Antropocentrism
-        rel:
-          arg: rejected by
-          target: Posthumanism
-      - name: Dualism
-      - name: Critical Posthumanism
-        rel:
-          arg: part of
-          target: Posthumanism
-      - name: Cultural Posthumanism
-        rel:
-          - arg: part of
-            target: Posthumanism
-          - arg: developed from
-            target: A Manifesto for Cyborgs
-          - arg: developed from
-            target: Literary Criticism
-          - arg: part of
-            target: Cultural Studies
-          - arg: developed from
-            target: A Manifesto for Cyborgs
-      - name: Philosophical Posthumanism
-        rel:
-          arg: part of
-          target: Posthumanism
-      - name: Literary Criticism
-      - name: Literary Theory
-      - name: Cultural Studies
-      - name: Animal Studies
-        rel:
-          arg: developed from
-          target: A Manifesto for Cyborgs
-      - name: Transhumanism
-      - name: Antihumanism
-      - name: Metahumanism
-      - name: Posthumanities
-      - name: Metahumanities
-      - name: Object-oriented Ontologies
-      - name: Non-human Turn
-      - name: Feminism
+      - edge:
+          object: Transhumanism
+          predicate: AFFILIATED_WITH
+        node: DavidPearce
+      - _node: HedonisticImperative
+        edge:
+          - object: DavidPearce
+            predicate: CREATED_BY
+          - object: smartDrugs
+            predicate: FOCUS_ON
+      - _node: Singularitianism
+        edge:
+          object: Transhumanism
+          predicate: PART_OF
+      - _node: Philosophy
+      - _node: LibertarianTranshumanism
+        edge:
+          object: Transhumanism
+          predicate: PART_OF
+      - _node: DemocraticTranshumanism
+        edge:
+          object: Transhumanism
+          predicate: PART_OF
+      - _node: Extropianism
+        edge:
+          - object: Transhumanism
+            predicate: PART_OF
+          - object: Philosophy
+            predicate: FOCUS_ON
+          - object: MaxMore
+            predicate: CREATED_BY
+      - _node: Posthumanism
+        edge:
+          object: Postmodernism
+          predicate: DEVELOPED_FROM
+      - _node: Humanism
+        edge:
+          object: Antropocentrism
+          predicate: FOCUS_ON
+      - _node: Antropocentrism
+        edge:
+          object: Posthumanism
+          predicate: REJECTED_BY
+      - _node: Dualism
+      - _node: CriticalPosthumanism
+        edge:
+          object: Posthumanism
+          predicate: PART_OF
+      - _node: CulturalPosthumanism
+        edge:
+          - object: Posthumanism
+            predicate: PART_OF
+          - object: AManifestoForCyborgs
+            predicate: DEVELOPED_FROM
+          - object: LiteraryCriticism
+            predicate: DEVELOPED_FROM
+          - object: CulturalStudies
+            predicate: PART_OF
+          - object: AManifestoForCyborgs
+            predicate: DEVELOPED_FROM
+      - _node: PhilosophicalPosthumanism
+        edge:
+          object: Posthumanism
+          predicate: PART_OF
+      - _node: LiteraryCriticism
+      - _node: LiteraryTheory
+      - _node: CulturalStudies
+      - _node: AnimalStudies
+        edge:
+          object: AManifestoForCyborgs
+          predicate: DEVELOPED_FROM
+      - _node: Transhumanism
+        edge:
+          - object: LaDivinaComedia
+            predicate: COINED_BY
+          - object: TheCocktailParty
+            predicate: COINED_BY
+          - object: TheEssenseOfTheDemocraticIdea
+            predicate: COINED_BY
+          - object: Enlightment
+            predicate: FOCUS_ON
+      - _node: Antihumanism
+      - _node: Metahumanism
+      - _node: Posthumanities
+      - _node: Metahumanities
+      - _node: Object-orientedOntologies
+      - _node: Non-humanTurn
+      - _node: Feminism
   - Person:
-      - name: Ihab Hassan
-      - name: Donna Haraway
-      - name: Katherine Hayles
-      - from: Italy
-        name: Alhieri Dante
+      - _node: JamesHughes
+        edge:
+          object: DemocraticTranshumanism
+          predicate: AFFILIATED_WITH
+      - _node: MaxMore
+        edge:
+          object: Extropianism
+          predicate: AFFILIATED_WITH
+      - _node: ZoltanIstvan
+        edge:
+          - object: LibertarianTranshumanism
+            predicate: AFFILIATED_WITH
+          - context: run for presidency to attract attention to Transhumanism
+            object: PresidencyOfUSA
+            predicate: CHALLENGED
+        from: USA
+      - _node: IhabHassan
+      - _node: DonnaHaraway
+      - _node: KatherineHayles
+      - _node: AlhieriDante
+        from: Italy
         yob: 1265
         yod: 1321
       - from:
           - UK
           - USA
-      - name: T.S. Eliot
+      - _node: TSEliot
+        name: T.S. Eliot
         yob: 1888
         yod: 1965
-      - from: France
+      - _node: PierreTeilharddeChardin
+        from: France
         name: Pierre Teilhard de Chardin
         yob: 1887
         yod: 1955
-      - from: UK
-        name: Julian Huxley
+      - _node: JulianHuxley
+        edge:
+          object: PierreTeilharddeChardin
+          predicate: INSPIRED_BY
+        from: UK
         yob: 1887
         yod: 1963
-      - from: UK
-        name: Aldous Huxley
+      - _node: AldousHuxley
+        edge:
+          attribute: brother
+          object: JulianHuxley
+          predicate: RELATED_TO
+        from: UK
         yob: 1894
         yod: 1963
-  - Work:
-      - fullName: 'Prometheus as Performer: Toward a Posthumanist Culture?'
+  - Media:
+      - _node: TranshumanistDeclaration
+        edge:
+          object: JamesHughes
+          predicate: CREATED_BY
+        type: manifesto
+      - _node: Humanity+
+        edge:
+          object: Transhumanism
+          predicate: PART_OF
+        name: Humanity+
+        type: website
+        url: https://humanityplus.org/
+      - _node: TheFutureOfMankind
+        edge:
+          object: PierreTeilharddeChardin
+          predicate: CREATED_BY
+        name: The Future of Mankind
+        published: 1959
+        type: anthology
+      - _node: PrometheusAsPerformer
+        edge:
+          attribute: author
+          object: IhabHassan
+          predicate: CREATED_BY
+        fullName: 'Prometheus as Performer: Toward a Posthumanist Culture?'
         name: Prometheus as Performer
         published: 1977
-        rel:
-          arg: created by
-          target: Ihab Hassan
         type: article
-      - name: The Postmodern Turn
+      - _node: ThePostmodernTurn
+        edge:
+          attribute: author
+          object: IhabHassan
+          predicate: CREATED_BY
         published: 1987
-        rel:
-          arg: created by
-          target: Ihab Hassan
         type: article
-      - fullName: 'How We Became Virtual Posthuman: Virtual Bodies in Cybernetics, Literature and Informatics'
-        name: How We Became Virtual Posthuman
+      - _node: HowWeBecameVirtualPosthuman
+        edge:
+          - attribute: author
+            object: KatherineHayles
+            predicate: CREATED_BY
+          - object: Postmodernism
+            predicate: PART_OF
+          - object: Feminism
+            predicate: PART_OF
+        fullName: 'How We Became Virtual Posthuman: Virtual Bodies in Cybernetics, Literature and Informatics'
         published: 1999
-        rel:
-          - arg: created by
-            target: Katherine Hayles
-          - arg: part of
-            target: Postmodernism
-          - arg: part of
-            target: Feminism
         type: book
-      - lang: Italian
-        name: La Divina Comedia
+      - _node: LaDivinaComedia
+        edge:
+          attribute: author
+          object: AlhieriDante
+          predicate: CREATED_BY
+        lang: Italian
         published: 1321
-        rel:
-          arg: created by
-          target: Alhieri Dante
         type: literature
-      - name: The Cocktail Party
+      - _node: TheCocktailParty
+        edge:
+          attribute: author
+          object: TSEliot
+          predicate: CREATED_BY
         published: 1950
-        rel:
-          arg: created by
-          target: T.S. Eliot
         type: literature
-      - fullName: 'The Essence of the Democratic Idea: A Biological approach'
+      - _node: TheEssenseOfTheDemocraticIdea
+        edge:
+          - object: TheFutureOfMankind
+            predicate: PART_OF
+          - object: PierreTeilharddeChardin
+            predicate: CREATED_BY
+        fullName: 'The Essence of the Democratic Idea: A Biological approach'
         name: The Essence of the Democratic Idea
         published: 1949
         type: paper
-      - name: The Phenomenon of Man
+      - _node: ThePhenomenonOfMan
+        edge:
+          - attribute: author
+            object: PierreTeilharddeChardin
+            predicate: CREATED_BY
+          - attribute: introduction
+            object: JulianHuxley
+            predicate: CREATED_BY
+        name: The Phenomenon of Man
         published: 1955
         type: book
-      - fullName: 'A Manifesto for Cyborgs: Science, Technology, and Social Feminism in 1980s'
+      - _node: AManifestoForCyborgs
+        edge:
+          attribute: author
+          object: DonnaHaraway
+          predicate: CREATED_BY
+        fullName: 'A Manifesto for Cyborgs: Science, Technology, and Social Feminism in 1980s'
         name: A Manifesto for Cyborgs
         published: 1985
-        rel:
-          arg: created by
-          target: Donna Haraway
         type: article
   - Epoch:
-      - name: Antropocene
-      - name: Possibility of posthumans now
-        rel:
-          - arg: rejected by
-            context: humans today are able to shift away from antropocentric onto-epistemological approach
-            target: Posthumanism
-          - arg: accepted by
-            context: attainable only by transcending beyond biological shell
-            target: Transhumanism
+      - _node: Enlightment
+        end: 1789
+        start: 1715
+      - _node: PossibilitiesOfHumansNow
+        name: Antropocene
+      - edge:
+          - context: humans today are able to shift away from antropocentric onto-epistemological approach
+            object: Posthumanism
+            predicate: REJECTED_BY
+          - context: attainable only by transcending beyond biological shell
+            object: Transhumanism
+            predicate: ACCEPTED_BY
+        name: Possibilities of posthumans now
+        start: XXI
+  - Institution:
+      - name: smart drugs
+        node: smartDrugs
+        type: cultural
+      - _node: PresidencyOfUSA
+        type: government
+      - _node: ExtropyInstitute
+        edge:
+          object: Extropianism
+          predicate: PART_OF
+        status: closed
+        type: research
