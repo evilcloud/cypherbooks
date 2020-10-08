@@ -1,66 +1,66 @@
-- _label: Person
-  _node: DavidPearce
-  edge:
+- alias: DavidPearce
+  label: Person
+  relationship:
     object: Transhumanism
     predicate: AFFILIATED_WITH
-- _label: Field
-  _node: HedonisticImperative
-  edge:
+- alias: HedonisticImperative
+  label: Field
+  relationship:
     - object: DavidPearce
       predicate: CREATED_BY
     - object: smartDrugs
       predicate: FOCUS_ON
-- _label: Field
-  _node: Singularitianism
-  edge:
+- alias: Singularitianism
+  label: Field
+  relationship:
     object: Transhumanism
     predicate: PART_OF
-- _label: Field
-  _node: Philosophy
-- _label: Field
-  _node: LibertarianTranshumanism
-  edge:
+- alias: Philosophy
+  label: Field
+- alias: LibertarianTranshumanism
+  label: Field
+  relationship:
     object: Transhumanism
     predicate: PART_OF
-- _label: Field
-  _node: DemocraticTranshumanism
-  edge:
+- alias: DemocraticTranshumanism
+  label: Field
+  relationship:
     object: Transhumanism
     predicate: PART_OF
-- _label: Field
-  _node: Extropianism
-  edge:
+- alias: Extropianism
+  label: Field
+  relationship:
     - object: Transhumanism
       predicate: PART_OF
     - object: Philosophy
       predicate: FOCUS_ON
     - object: MaxMore
       predicate: CREATED_BY
-- _label: Field
-  _node: Posthumanism
-  edge:
+- alias: Posthumanism
+  label: Field
+  relationship:
     object: Postmodernism
     predicate: DEVELOPED_FROM
-- _label: Field
-  _node: Humanism
-  edge:
+- alias: Humanism
+  label: Field
+  relationship:
     object: Antropocentrism
     predicate: FOCUS_ON
-- _label: Field
-  _node: Antropocentrism
-  edge:
+- alias: Antropocentrism
+  label: Field
+  relationship:
     object: Posthumanism
     predicate: REJECTED_BY
-- _label: Field
-  _node: Dualism
-- _label: Field
-  _node: CriticalPosthumanism
-  edge:
+- alias: Dualism
+  label: Field
+- alias: CriticalPosthumanism
+  label: Field
+  relationship:
     object: Posthumanism
     predicate: PART_OF
-- _label: Field
-  _node: CulturalPosthumanism
-  edge:
+- alias: CulturalPosthumanism
+  label: Field
+  relationship:
     - object: Posthumanism
       predicate: PART_OF
     - object: AManifestoForCyborgs
@@ -71,25 +71,25 @@
       predicate: PART_OF
     - object: AManifestoForCyborgs
       predicate: DEVELOPED_FROM
-- _label: Field
-  _node: PhilosophicalPosthumanism
-  edge:
+- alias: PhilosophicalPosthumanism
+  label: Field
+  relationship:
     object: Posthumanism
     predicate: PART_OF
-- _label: Field
-  _node: LiteraryCriticism
-- _label: Field
-  _node: LiteraryTheory
-- _label: Field
-  _node: CulturalStudies
-- _label: Field
-  _node: AnimalStudies
-  edge:
+- alias: LiteraryCriticism
+  label: Field
+- alias: LiteraryTheory
+  label: Field
+- alias: CulturalStudies
+  label: Field
+- alias: AnimalStudies
+  label: Field
+  relationship:
     object: AManifestoForCyborgs
     predicate: DEVELOPED_FROM
-- _label: Field
-  _node: Transhumanism
-  edge:
+- alias: Transhumanism
+  label: Field
+  relationship:
     - object: LaDivinaComedia
       predicate: COINED_BY
     - object: TheCocktailParty
@@ -98,215 +98,238 @@
       predicate: COINED_BY
     - object: Enlightenment
       predicate: FOCUS_ON
-- _label: Field
-  _node: Antihumanism
-- _label: Field
-  _node: Metahumanism
-- _label: Field
-  _node: Posthumanities
-- _label: Field
-  _node: Metahumanities
-- _label: Field
-  _node: ObjectOrientedOntologies
+- alias: Antihumanism
+  label: Field
+- alias: Metahumanism
+  label: Field
+- alias: Posthumanities
+  label: Field
+- alias: Metahumanities
+  label: Field
+- alias: ObjectOrientedOntologies
+  label: Field
   name: Object-Oriented Ontologies
-- _label: Field
-  _node: NonHumanTurn
+- alias: NonHumanTurn
+  label: Field
   name: Non-human Turn
-- _label: Field
-  _node: Feminism
-- _label: Person
-  _node: JamesHughes
-  edge:
+- alias: Feminism
+  label: Field
+- alias: JamesHughes
+  label: Person
+  relationship:
     object: DemocraticTranshumanism
     predicate: AFFILIATED_WITH
-- _label: Person
-  _node: MaxMore
-  edge:
+- alias: MaxMore
+  label: Person
+  relationship:
     object: Extropianism
     predicate: AFFILIATED_WITH
-- _label: Person
-  _node: ZoltanIstvan
-  edge:
+- alias: ZoltanIstvan
+  from: USA
+  label: Person
+  relationship:
     - object: LibertarianTranshumanism
       predicate: AFFILIATED_WITH
     - context: run for presidency to attract attention to Transhumanism
       object: PresidencyOfUSA
       predicate: CHALLENGED
-  from: USA
-- _label: Person
-  _node: IhabHassan
-- _label: Person
-  _node: DonnaHaraway
-- _label: Person
-  _node: KatherineHayles
-- _label: Person
-  _node: AlhieriDante
-  from: Italy
-  yob: 1265
-  yod: 1321
-- _label: Person
-  _node: TSEliot
-  from:
-    - UK
-    - USA
-  name: T.S. Eliot
-  yob: 1888
-  yod: 1965
-- _label: Person
-  _node: PierreTeilharddeChardin
-  from: France
-  name: Pierre Teilhard de Chardin
-  yob: 1887
-  yod: 1955
-- _label: Person
-  _node: JulianHuxley
-  edge:
+- alias: IhabHassan
+  label: Person
+- alias: DonnaHaraway
+  label: Person
+- alias: KatherineHayles
+  label: Person
+- alias: AlhieriDante
+  attributes:
+    from: Italy
+    yob: 1265
+    yod: 1321
+  label: Person
+- alias: TSEliot
+  attributes:
+    from:
+      - UK
+      - USA
+    name: T.S. Eliot
+    yob: 1888
+    yod: 1965
+  label: Person
+- alias: PierreTeilharddeChardin
+  attributes:
+    from: France
+    name: Pierre Teilhard de Chardin
+    yob: 1887
+    yod: 1955
+  label: Person
+- alias: JulianHuxley
+  attributes:
+    from: UK
+    yob: 1887
+    yod: 1963
+  label: Person
+  relationship:
     object: PierreTeilharddeChardin
     predicate: INSPIRED_BY
-  from: UK
-  yob: 1887
-  yod: 1963
-- _label: Person
-  _node: AldousHuxley
-  edge:
-    attribute: brother
+- alias: AldousHuxley
+  attributes:
+    from: UK
+    yob: 1894
+    yod: 1963
+  label: Person
+  relationship:
+    attributes:
+      position: brother
     object: JulianHuxley
     predicate: RELATED_TO
-  from: UK
-  yob: 1894
-  yod: 1963
-- _label: Media
-  _node: TranshumanistDeclaration
-  edge:
+- alias: TranshumanistDeclaration
+  label: Media
+  relationship:
     object: JamesHughes
     predicate: CREATED_BY
   type: manifesto
-- _label: Media
-  _node: Humanity+
-  edge:
+- alias: Humanityplus
+  attributes:
+    type: website
+    url: 'https://humanityplus.org/'
+  fullName: Humanity+
+  label: Media
+  relationship:
     object: Transhumanism
     predicate: PART_OF
-  name: Humanity+
-  type: website
-  url: "https://humanityplus.org/"
-- _label: Media
-  _node: TheFutureOfMankind
-  edge:
+- alias: TheFutureOfMankind
+  attributes:
+    published: 1959
+    type: anthology
+  label: Media
+  name: The Future of Mankind
+  relationship:
     object: PierreTeilharddeChardin
     predicate: CREATED_BY
-  name: The Future of Mankind
-  published: 1959
-  type: anthology
-- _label: Media
-  _node: PrometheusAsPerformer
-  edge:
-    attribute: author
-    object: IhabHassan
-    predicate: CREATED_BY
-  fullName: "Prometheus as Performer: Toward a Posthumanist Culture?"
+- alias: PrometheusAsPerformer
+  attributes:
+    published: 1977
+    type: article
+  fullName: 'Prometheus as Performer: Toward a Posthumanist Culture?'
+  label: Media
   name: Prometheus as Performer
-  published: 1977
-  type: article
-- _label: Media
-  _node: ThePostmodernTurn
-  edge:
-    attribute: author
+  relationship:
     object: IhabHassan
+    position: author
     predicate: CREATED_BY
-  published: 1987
-  type: article
-- _label: Media
-  _node: HowWeBecameVirtualPosthuman
-  edge:
-    - attribute: author
-      object: KatherineHayles
+- alias: ThePostmodernTurn
+  attributes:
+    published: 1987
+    type: article
+  label: Media
+  relationship:
+    object: IhabHassan
+    position: author
+    predicate: CREATED_BY
+- alias: HowWeBecameVirtualPosthuman
+  attributes:
+    fullName: 'How We Became Virtual Posthuman: Virtual Bodies in Cybernetics, Literature and Informatics'
+    published: 1999
+    type: book
+  label: Media
+  relationship:
+    - object: KatherineHayles
+      position: author
       predicate: CREATED_BY
     - object: Postmodernism
       predicate: PART_OF
     - object: Feminism
       predicate: PART_OF
-  fullName: "How We Became Virtual Posthuman: Virtual Bodies in Cybernetics, Literature and Informatics"
-  published: 1999
-  type: book
-- _label: Media
-  _node: LaDivinaComedia
-  edge:
-    attribute: author
+- alias: LaDivinaComedia
+  attributes:
+    lang: Italian
+    published: 1321
+    type: literature
+  label: Media
+  relationship:
+    attributes:
+      position: author
     object: AlhieriDante
     predicate: CREATED_BY
-  lang: Italian
-  published: 1321
-  type: literature
-- _label: Media
-  _node: TheCocktailParty
-  edge:
-    attribute: author
+- alias: TheCocktailParty
+  attributes:
+    published: 1950
+    type: literature
+  label: Media
+  relationship:
+    attributes:
+      position: author
     object: TSEliot
     predicate: CREATED_BY
-  published: 1950
-  type: literature
-- _label: Media
-  _node: TheEssenseOfTheDemocraticIdea
-  edge:
+- alias: TheEssenseOfTheDemocraticIdea
+  attributes:
+    fullName: 'The Essence of the Democratic Idea: A Biological approach'
+    published: 1949
+    type: paper
+  label: Media
+  name: The Essence of the Democratic Idea
+  relationship:
     - object: TheFutureOfMankind
       predicate: PART_OF
     - object: PierreTeilharddeChardin
       predicate: CREATED_BY
-  fullName: "The Essence of the Democratic Idea: A Biological approach"
-  name: The Essence of the Democratic Idea
-  published: 1949
-  type: paper
-- _label: Media
-  _node: ThePhenomenonOfMan
-  edge:
-    - attribute: author
-      object: PierreTeilharddeChardin
-      predicate: CREATED_BY
-    - attribute: introduction
-      object: JulianHuxley
-      predicate: CREATED_BY
+- alias: ThePhenomenonOfMan
+  attributes:
+    published: 1955
+    type: book
+  label: Media
   name: The Phenomenon of Man
-  published: 1955
-  type: book
-- _label: Media
-  _node: AManifestoForCyborgs
-  edge:
-    attribute: author
-    object: DonnaHaraway
-    predicate: CREATED_BY
-  fullName: "A Manifesto for Cyborgs: Science, Technology, and Social Feminism in 1980s"
+  relationship:
+    - object: PierreTeilharddeChardin
+      position: author
+      predicate: CREATED_BY
+    - object: JulianHuxley
+      position: introduction
+      predicate: CREATED_BY
+- alias: AManifestoForCyborgs
+  attributes:
+    fullName: 'A Manifesto for Cyborgs: Science, Technology, and Social Feminism in 1980s'
+    published: 1985
+    type: article
+  label: Media
   name: A Manifesto for Cyborgs
-  published: 1985
-  type: article
-- _label: Temporality
-  _node: Enlightenment
-  end: 1789
-  start: 1715
-- _label: Temporality
-  _node: PossibilitiesOfHumansNow
+  relationship:
+    object: DonnaHaraway
+    position: author
+    predicate: CREATED_BY
+- alias: Enlightenment
+  attributes:
+    end: 1789
+    start: 1715
+  label: Temporality
+- alias: PossibilitiesOfHumansNow
+  label: Temporality
   name: Antropocene
-- _label: Institution
-  _node: PossibilitiesOfPosthumansNow
-  edge:
+- alias: PossibilitiesOfPosthumansNow
+  attributes:
+    start: XXI
+  label: Institution
+  name: Possibilities of posthumans now
+  relationship:
     - context: humans today are able to shift away from antropocentric onto-epistemological approach
       object: Posthumanism
       predicate: REJECTED_BY
     - context: attainable only by transcending beyond biological shell
       object: Transhumanism
       predicate: ACCEPTED_BY
-  name: Possibilities of posthumans now
-  start: XXI
-- _label: Institution
-  _node: smartDrugs
+- alias: smartDrugs
+  attributes:
+    type: cultural
+  label: Institution
   name: smart drugs
-  type: cultural
-- _label: Institution
-  _node: PresidencyOfUSA
-  type: government
-- _label: Institution
-  _node: ExtropyInstitute
-  edge:
+- alias: PresidencyOfUSA
+  attributes:
+    type: government
+  label: Institution
+- alias: ExtropyInstitute
+  attributes:
+    status: closed
+    type: research
+  label: Institution
+  relationship:
     object: Extropianism
     predicate: PART_OF
-  status: closed
-  type: research
