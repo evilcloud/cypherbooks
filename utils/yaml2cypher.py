@@ -1,3 +1,5 @@
+#!/usr/local/bin/python3
+
 import sys
 import yaml
 import os
@@ -5,8 +7,16 @@ import re
 import itertools
 
 
-def camel_case_split(str):
-    return " ".join(re.findall(r"[A-Z](?:[a-z]+|[A-Z]*(?=[A-Z]|$))", str))
+def camel_case_split(string: str) -> str:
+    """Returns the string split by capital letters: CamelCase -> Camel Case
+
+    Args:
+        string (str): camelcased string
+
+    Returns:
+        str: split string
+    """
+    return " ".join(re.findall(r"[A-Z](?:[a-z]+|[A-Z]*(?=[A-Z]|$))", string))
 
 
 def argument(arg: list) -> str:
@@ -35,7 +45,7 @@ def argument(arg: list) -> str:
     quit()
 
 
-def get_yaml(filename):
+def get_yaml(filename: str) -> list:
     with open(filename, "r") as f:
         return yaml.load(f, Loader=yaml.FullLoader)
 
@@ -51,15 +61,16 @@ def alpha_num(data):
     return data
 
 
-def build_nodes(data):
+def extract_node(data):
     # input(data)
-    node = data["_node"]
-    label = data.get("_label")
-    name = data.get("name")
+    schematics = {"node": "_node", "label": "_label", "name": "name"}
+    node = data[schematics["node"]]
+    label = data.get(schematics["label"])
+    name = data.get(schematics["name"])
     name = name if name else camel_case_split(node)
     attributes = ""
     for items in data:
-        if items not in ["_node", "_label", "edge", "name"]:
+        if items not in schematics:
             attributes += f', {items}: "{data[items]}"'
     return f'{node}:{label} {{name: "{name}"{attributes}}}'
 
@@ -99,11 +110,12 @@ data = get_yaml(argument(sys.argv))
 nodes = []
 edges = []
 for item in data:
-    nodes.append(build_nodes(item))
+    nodes.append(extract_node(item))
     edges.append(build_edges(item))
 
 for node in nodes:
-    # print(node)
+    print(node, "\n")
     pass
 for edge in edges:
-    print(edge)
+    # print(edge)
+    pass
