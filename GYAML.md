@@ -67,6 +67,7 @@ The important taxonomical parts are:
   - **name**: a value commonly used as a node name if present. [gyaml_parser]() automatically de-camelcases the alias and uses it as name if name entry is not present. Important: cypher keeps name attribute in attributes, while here it is kept in the node's main tree. The decision behind it is the speed of entry: the most simple data with a minimal number of scalars often will have a name, thus forcing to open attributes field. It is unnecessary so now.
   - **attributes**: optional, followed by the next line with the attribute(s)
     - any number and type of attributes are permitted
+- **Edge level**
   - **relationships**: optional. The only way to declare edge. Subject is, of course is known and is unnecessary to add.
     - **object**: required. Declaration of the destination node. Can be a list.
     - **predicate**: required. Predicate. [gyaml_parser]() will uppercase and replace spaces with underscores.
