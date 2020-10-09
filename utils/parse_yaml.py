@@ -1,5 +1,20 @@
 #!/usr/local/bin/python3
 
+"""
+A GYAML parser. Info on GYAML: https://github.com/evilcloud/cypherbooks/blob/master/GYAML.md
+Returns dictionaries with nodes and edges
+
+node components:
+    alias (required)
+    label (required)
+    name (optional)
+    attributes (optional. can be key entry or list of key entries)
+    relationship (optional. only as list)
+        object (required)
+        predicate (required)
+        attributes (optional. key entry or list of key entries)
+
+"""
 import sys
 import yaml
 import os

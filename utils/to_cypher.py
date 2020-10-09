@@ -35,7 +35,7 @@ def argument(arg: list) -> str:
     quit()
 
 
-def save_yaml(filename, text: str):
+def save_file(filename, text: str):
     with open(filename, "w") as f:
         f.writelines(text)
         print(f"{filename} saved")
@@ -111,7 +111,7 @@ def build_cypher(filename):
 
     final = header + create + ",\n".join(cypher_list)
     new_filename = os.path.splitext(filename)[0] + ".cypher"
-    save_yaml(new_filename, final)
+    save_file(new_filename, final)
 
 
 def main():

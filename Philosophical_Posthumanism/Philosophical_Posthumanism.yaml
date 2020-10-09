@@ -41,6 +41,8 @@
   relationship:
     object: Postmodernism
     predicate: DEVELOPED_FROM
+- alias: Postmodernism
+  label: Field
 - alias: Humanism
   label: Field
   relationship:
@@ -190,7 +192,7 @@
 - alias: Humanityplus
   attributes:
     type: website
-    url: 'https://humanityplus.org/'
+    url: "https://humanityplus.org/"
   fullName: Humanity+
   label: Media
   relationship:
@@ -209,7 +211,7 @@
   attributes:
     published: 1977
     type: article
-  fullName: 'Prometheus as Performer: Toward a Posthumanist Culture?'
+  fullName: "Prometheus as Performer: Toward a Posthumanist Culture?"
   label: Media
   name: Prometheus as Performer
   relationship:
@@ -227,7 +229,7 @@
     predicate: CREATED_BY
 - alias: HowWeBecameVirtualPosthuman
   attributes:
-    fullName: 'How We Became Virtual Posthuman: Virtual Bodies in Cybernetics, Literature and Informatics'
+    fullName: "How We Became Virtual Posthuman: Virtual Bodies in Cybernetics, Literature and Informatics"
     published: 1999
     type: book
   label: Media
@@ -262,7 +264,7 @@
     predicate: CREATED_BY
 - alias: TheEssenseOfTheDemocraticIdea
   attributes:
-    fullName: 'The Essence of the Democratic Idea: A Biological approach'
+    fullName: "The Essence of the Democratic Idea: A Biological approach"
     published: 1949
     type: paper
   label: Media
@@ -287,7 +289,7 @@
       predicate: CREATED_BY
 - alias: AManifestoForCyborgs
   attributes:
-    fullName: 'A Manifesto for Cyborgs: Science, Technology, and Social Feminism in 1980s'
+    fullName: "A Manifesto for Cyborgs: Science, Technology, and Social Feminism in 1980s"
     published: 1985
     type: article
   label: Media

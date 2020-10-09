@@ -4,7 +4,7 @@ Graph constructs of books' nouns, events and relations and broken down in the ca
 
 The choice of books is completely arbitrary.
 
-As the name of the project would suggest, the whole thing started with [cypher/GQL](https://www.opencypher.org/). Pretty quickly it has become clear that cypher, as good as it may be, has a very serious limitation of being hard to parse, ergo there are very few convertors between cypher and other formats available, and you are pretty much stuck using New4j. The cypher driver (particularity for Python and JavaScript) is great, but the why would anyone want to depend on the ability to run an entire database just to get some data from own handmade file? The current decision has fell on YAML — the format is human readable, very easy for manual data entry, and very easy to parse.
+As the name of the project would suggest, the whole thing started with [cypher/GQL](https://www.opencypher.org/). Pretty quickly it has become clear that cypher, as good as it may be, has a very serious limitation of being hard to parse, ergo there are very few convertors between cypher and other formats available, and you are pretty much stuck using New4j. The format was switched to YAML, with the schema most suitable for this type of task. More on GYAML schema can be found [here](https://github.com/evilcloud/cypherbooks/blob/master/GYAML.md)
 
 ## Utilities
 
