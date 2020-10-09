@@ -58,7 +58,7 @@ Generally the entries look like this:
   label: Person
 ```
 
-as clearly seen in the example, unlike cypher, gyaml has the edge part build in into the node. There isn't a reason not to do so for the manual entry -- the operator will always need to see the subject, whenever the new relationship appears anyway. There is also a possibility of entering the attributes as single entries or as the list. Not exactly a deal breaker in terms of efficiency, but some may feel annoyed by having to type an additional hyphen, so now they don't have to.
+as clearly seen in the example, unlike cypher, gyaml has the edge component already built in into the node. There isn't a reason not to do so for the manual entry -- the operator will always need to see the subject, whenever the new relationship appears anyway. There is also a possibility of entering the attributes as single entries or as the list. Not exactly a deal breaker in terms of efficiency, but some may feel annoyed by having to type an additional hyphen, so now they don't have to.
 
 The important taxonomical parts are:
 - **Node level**
